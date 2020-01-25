@@ -20,6 +20,8 @@ import org.kohsuke.args4j.ParserProperties;
 
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.util.Map;
+import java.util.HashMap;
 
 import static io.osirrc.ciff.CommonIndexFileFormat.Posting;
 import static io.osirrc.ciff.CommonIndexFileFormat.PostingsList;
@@ -30,17 +32,20 @@ public class DumpLuceneIndex {
     @Option(name = "-postingsOutput", metaVar = "[file]", required = true, usage = "postings output")
     public String postingsOutput = "";
 
-    @Option(name = "-docidOutput", metaVar = "[file]", required = true, usage = "docid output")
-    public String docidOutput = "";
-
-    @Option(name = "-lengthsOutput", metaVar = "[file]", required = true, usage = "lengths output")
-    public String lengthsOutput = "";
+    @Option(name = "-docsOutput", metaVar = "[file]", required = true, usage = "docid output")
+    public String docsOutput = "";
 
     @Option(name = "-index", metaVar = "[path]", required = true, usage = "index path")
     public String index = "";
 
     @Option(name = "-max", metaVar = "[int]", usage = "maximum number of postings to write")
     public int max = Integer.MAX_VALUE;
+
+    @Option(name = "-contentsField", metaVar = "[field name]", usage = "name of the 'contents' field")
+    public String contentsField = "contents";
+
+    @Option(name = "-docidField", metaVar = "[field name]", usage = "name of the 'docid' field")
+    public String docidsField = "id";
   }
 
   public static void main(String[] argv) throws Exception {
@@ -52,7 +57,7 @@ public class DumpLuceneIndex {
     } catch (CmdLineException e) {
       System.err.println(e.getMessage());
       parser.printUsage(System.err);
-      System.err.println("Example: Eval " + parser.printExample(OptionHandlerFilter.REQUIRED));
+      System.err.println("Example: DumpLuceneIndex " + parser.printExample(OptionHandlerFilter.REQUIRED));
       return;
     }
 
@@ -63,7 +68,7 @@ public class DumpLuceneIndex {
     int cnt = 0;
     // This is how you iterate through terms in the postings list.
     LeafReader leafReader = reader.leaves().get(0).reader();
-    TermsEnum termsEnum = leafReader.terms("contents").iterator();
+    TermsEnum termsEnum = leafReader.terms(args.contentsField).iterator();
     BytesRef bytesRef = termsEnum.next();
     while (bytesRef != null) {
       // This is the current term in the dictionary.
@@ -113,24 +118,27 @@ public class DumpLuceneIndex {
     System.out.println("Total of " + cnt + " postings written.");
     fileOut.close();
 
-    System.out.println("Writing docids...");
-    FileOutputStream docidOut = new FileOutputStream(args.docidOutput);
-    for (int i=0; i<reader.maxDoc(); i++) {
-      docidOut.write((reader.document(i).getField("id").stringValue() +  "\n").getBytes());
-    }
-    docidOut.close();
-    System.out.println("Done!");
-
-    System.out.println("Writing doclengths...");
-    FileOutputStream lengthsOut = new FileOutputStream(args.lengthsOutput);
+    Map<Integer, Integer> normsMap = new HashMap<>();
+    System.out.println("Reading norms into memory...");
     for (LeafReaderContext context : reader.leaves()) {
       leafReader = context.reader();
-      NumericDocValues docValues = leafReader.getNormValues("contents");
+      NumericDocValues docValues = leafReader.getNormValues(args.contentsField);
       while (docValues.nextDoc() != DocIdSetIterator.NO_MORE_DOCS) {
-        lengthsOut.write(((docValues.docID() + context.docBase) + "\t" + SmallFloat.byte4ToInt((byte) docValues.longValue()) + "\n").getBytes());
+        normsMap.put(docValues.docID() + context.docBase, SmallFloat.byte4ToInt((byte) docValues.longValue()));
       }
     }
-    lengthsOut.close();
+    System.out.println("Done!");
+
+    System.out.println("Writing docids...");
+    FileOutputStream docsOut = new FileOutputStream(args.docsOutput);
+    for (int i=0; i<reader.maxDoc(); i++) {
+      if (!normsMap.containsKey(i)) {
+        throw new Exception(String.format("Norm doesn't exist for docid %d!", i));
+      }
+      docsOut.write((i + "\t" + reader.document(i).getField(args.docidsField).stringValue() +
+          "\t" + normsMap.get(i) + "\n").getBytes());
+    }
+    docsOut.close();
     System.out.println("Done!");
 
     reader.close();
