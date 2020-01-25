@@ -1,5 +1,5 @@
 syntax = "proto3";
-package io.anserini.cidxf;
+package io.osirrc.ciff;
 
 message Posting {
   int32 docid = 1;

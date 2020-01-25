@@ -1,4 +1,4 @@
-package io.anserini.cidxf;
+package io.osirrc.ciff.lucene;
 
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -21,9 +21,9 @@ import org.kohsuke.args4j.ParserProperties;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
 
-import static io.anserini.cidxf.CommonIndexFormat.Posting;
-import static io.anserini.cidxf.CommonIndexFormat.PostingsList;
-import static io.anserini.cidxf.CommonIndexFormat.PostingsListOrBuilder;
+import static io.osirrc.ciff.CommonIndexFileFormat.Posting;
+import static io.osirrc.ciff.CommonIndexFileFormat.PostingsList;
+import static io.osirrc.ciff.CommonIndexFileFormat.PostingsListOrBuilder;
 
 public class DumpLuceneIndex {
   public static class Args {
@@ -97,7 +97,7 @@ public class DumpLuceneIndex {
         throw new RuntimeException(String.format("Unexpected number of postings! expected %d got %d", df, postingsWritten));
       }
 
-      CommonIndexFormat.PostingsList pl = ((CommonIndexFormat.PostingsList.Builder) plBuilder).build();
+      PostingsList pl = ((PostingsList.Builder) plBuilder).build();
       pl.writeDelimitedTo(fileOut);
 
       bytesRef = termsEnum.next();

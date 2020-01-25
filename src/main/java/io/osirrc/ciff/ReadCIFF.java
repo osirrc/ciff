@@ -1,4 +1,4 @@
-package io.anserini.cidxf;
+package io.osirrc.ciff;
 
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -8,7 +8,7 @@ import org.kohsuke.args4j.ParserProperties;
 
 import java.io.FileInputStream;
 
-public class ReadCommonIndexFormatDump {
+public class ReadCIFF {
   public static class Args {
     @Option(name = "-postings", metaVar = "[file]", required = true, usage = "postings file")
     public String postings = "";
@@ -32,7 +32,7 @@ public class ReadCommonIndexFormatDump {
 
     FileInputStream fileIn = new FileInputStream(args.postings);
     for (int i=0; i<args.max; i++ ) {
-      CommonIndexFormat.PostingsList pl = CommonIndexFormat.PostingsList.parseDelimitedFrom(fileIn);
+      CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
       System.out.print(String.format("term: '%s', df=%d, cf=%d", pl.getTerm(), pl.getDf(), pl.getCf()));
 
       if (pl.getDf() != pl.getPostingCount()) {

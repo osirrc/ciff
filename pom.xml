@@ -81,8 +81,12 @@
           <useWildcardClassPath>true</useWildcardClassPath>
           <programs>
             <program>
-              <mainClass>io.anserini.cidxf.DumpLuceneIndex</mainClass>
+              <mainClass>io.osirrc.ciff.lucene.DumpLuceneIndex</mainClass>
               <id>DumpLuceneIndex</id>
+            </program>
+            <program>
+              <mainClass>io.osirrc.ciff.ReadCIFF</mainClass>
+              <id>ReadCIFF</id>
             </program>
           </programs>
         </configuration>
