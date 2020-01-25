@@ -5,7 +5,7 @@ The Common Index File Format (CIFF) represents an attempt to build a binary data
 It currently comprises two components:
 
 + A [Protocol Buffer definition for encoding postings list](src/main/protobuf/CommonIndexFileFormat.proto).
-+ A plain-text file for sharing document metadata; currently, this is TSV file with internal (numeric) docid, collection docid, and document length.
++ A plain-text file for sharing document metadata. Currently, this is a TSV file with three fields: internal docid, collection docid, and document length. The internal docid refers to the docid used in the postings lists; the collection docid is the external identifier used in the document collection (i.e., those matching the qrels).
 
 ## Exporting Lucene Indexes
 
