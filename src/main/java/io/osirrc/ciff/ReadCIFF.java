@@ -26,13 +26,17 @@ public class ReadCIFF {
     } catch (CmdLineException e) {
       System.err.println(e.getMessage());
       parser.printUsage(System.err);
-      System.err.println("Example: Eval " + parser.printExample(OptionHandlerFilter.REQUIRED));
+      System.err.println("Example: ReadCIFF " + parser.printExample(OptionHandlerFilter.REQUIRED));
       return;
     }
 
     FileInputStream fileIn = new FileInputStream(args.postings);
     for (int i=0; i<args.max; i++ ) {
       CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
+      if (pl == null) {
+        // We've read all postings...
+        break;
+      }
       System.out.print(String.format("term: '%s', df=%d, cf=%d", pl.getTerm(), pl.getDf(), pl.getCf()));
 
       if (pl.getDf() != pl.getPostingCount()) {
@@ -43,7 +47,7 @@ public class ReadCIFF {
       for (int j=0; j< (pl.getDf() > 10 ? 10 : pl.getDf()); j++) {
         System.out.print(String.format(" (%d, %d)", pl.getPosting(j).getDocid(), pl.getPosting(j).getTf()));
       }
-      System.out.println("");
+      System.out.println(pl.getDf() > 10 ? " ..." : "");
     }
     fileIn.close();
   }

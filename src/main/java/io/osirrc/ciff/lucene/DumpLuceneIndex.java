@@ -18,10 +18,14 @@ import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.OptionHandlerFilter;
 import org.kohsuke.args4j.ParserProperties;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static io.osirrc.ciff.CommonIndexFileFormat.Posting;
 import static io.osirrc.ciff.CommonIndexFileFormat.PostingsList;
@@ -37,6 +41,9 @@ public class DumpLuceneIndex {
 
     @Option(name = "-index", metaVar = "[path]", required = true, usage = "index path")
     public String index = "";
+
+    @Option(name = "-termsFile", metaVar = "[file]", usage = "file containing terms to dump")
+    public String termsFile = null;
 
     @Option(name = "-max", metaVar = "[int]", usage = "maximum number of postings to write")
     public int max = Integer.MAX_VALUE;
@@ -61,6 +68,21 @@ public class DumpLuceneIndex {
       return;
     }
 
+    Set<String> terms = null;
+    if (args.termsFile != null) {
+      terms = new HashSet<>();
+      BufferedReader reader = new BufferedReader(new FileReader(args.termsFile));
+      String line = reader.readLine();
+      while (line != null) {
+        line = line.strip();
+        terms.add(line);
+        line = reader.readLine();
+      }
+      reader.close();
+      System.out.println(String.format("Loaded termsFile, only dumping postings for %d specified terms.",
+          terms.size()));
+    }
+
     IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(args.index)));
 
     System.out.println("Writing postings...");
@@ -73,6 +95,12 @@ public class DumpLuceneIndex {
     while (bytesRef != null) {
       // This is the current term in the dictionary.
       String token = bytesRef.utf8ToString();
+
+      if (terms != null && !terms.contains(token)) {
+        bytesRef = termsEnum.next();
+        continue;
+      }
+
       Term term = new Term("contents", token);
       //System.out.print(token + " (df = " + reader.docFreq(term) + "):");
 
