@@ -88,6 +88,10 @@
               <mainClass>io.osirrc.ciff.ReadCIFF</mainClass>
               <id>ReadCIFF</id>
             </program>
+            <program>
+              <mainClass>io.osirrc.ciff.olddog.CIFFToCsv</mainClass>
+              <id>CIFFToCsv</id>
+            </program>
           </programs>
         </configuration>
       </plugin>
