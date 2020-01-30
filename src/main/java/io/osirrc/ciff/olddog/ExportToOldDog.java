@@ -5,7 +5,7 @@ import org.kohsuke.args4j.*;
 
 import java.io.*;
 
-public class CIFFToCsv {
+public class ExportToOldDog {
   public static class Args {
     @Option(name = "-postings", metaVar = "[file]", required = true, usage = "postings file")
     String postings = "";
@@ -13,11 +13,12 @@ public class CIFFToCsv {
     @Option(name = "-dict", required = true, usage = "Filename for output dict csv file")
     String dict = "";
 
-    @Option(name = "-terms", required = true, usage = "Filename for output terms csv file")
+    // Only include terms if you want to create a csv file for this.
+    @Option(name = "-terms", usage = "Filename for output terms csv file")
     String terms = "";
 
-    // Creating the docs file is not necessary as the docs.txt is the same. If you want to create one anyway using
-    // a different separator and ordering you can use this parameter.
+    // Creating the docs file is not necessary as the docs.txt in CIFF is the same.
+    // If you want to create one anyway using a different separator and ordering you can use this parameter.
     @Option(name = "-docs", depends = {"-CIFFdocs"}, usage = "Filename for output docs csv file")
     String docs = "";
 
@@ -26,7 +27,7 @@ public class CIFFToCsv {
   }
 
   public static void main(String[] argv) throws Exception {
-    CIFFToCsv.Args args = new CIFFToCsv.Args();
+    ExportToOldDog.Args args = new ExportToOldDog.Args();
     CmdLineParser parser = new CmdLineParser(args, ParserProperties.defaults().withUsageWidth(90));
 
     try {
@@ -34,7 +35,7 @@ public class CIFFToCsv {
     } catch (CmdLineException e) {
       System.err.println(e.getMessage());
       parser.printUsage(System.err);
-      System.err.println("Example: ReadCIFFToCsv " + parser.printExample(OptionHandlerFilter.REQUIRED));
+      System.err.println("Example: ExportToOldDog " + parser.printExample(OptionHandlerFilter.REQUIRED));
       return;
     }
 
@@ -52,30 +53,38 @@ public class CIFFToCsv {
     }
 
     BufferedWriter dictWriter = new BufferedWriter(new FileWriter(args.dict));
-    BufferedWriter termsWriter = new BufferedWriter(new FileWriter(args.terms));
+
+    BufferedWriter termsWriter = null;
+    if (!args.terms.equals(""))
+    {
+      termsWriter = new BufferedWriter(new FileWriter(args.terms));
+    }
     FileInputStream fileIn = new FileInputStream(args.postings);
 
     long termID = 0;
     while (true) {
       CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
       if (pl == null) {
-        // We've read all postings...
         break;
       }
       dictWriter.write(Long.toString(termID) + '|' + pl.getTerm() + '|' + pl.getDf());
       dictWriter.newLine();
-      long docID = 0;
-      for (int j=0; j< pl.getDf(); j++) {
-        docID += pl.getPosting(j).getDocid();
-        termsWriter.write(Long.toString(termID) + '|' + docID + '|' + Long.toString(pl.getPosting(j).getTf()));
-        termsWriter.newLine();
+      if (termsWriter != null) {
+        long docID = 0;
+        for (int j=0; j< pl.getDf(); j++) {
+          docID += pl.getPosting(j).getDocid();
+          termsWriter.write(Long.toString(termID) + '|' + docID + '|' + Long.toString(pl.getPosting(j).getTf()));
+          termsWriter.newLine();
+        }
       }
       termID += 1;
     }
     dictWriter.flush();
-    termsWriter.flush();
     dictWriter.close();
-    termsWriter.close();
+    if (termsWriter != null) {
+      termsWriter.flush();
+      termsWriter.close();
+    }
     fileIn.close();
   }
 }
