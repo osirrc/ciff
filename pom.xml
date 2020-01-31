@@ -88,6 +88,14 @@
               <mainClass>io.osirrc.ciff.ReadCIFF</mainClass>
               <id>ReadCIFF</id>
             </program>
+            <program>
+              <mainClass>io.osirrc.ciff.olddog.ExportToOldDog</mainClass>
+              <id>ExportToOldDog</id>
+            </program>
+            <program>
+              <mainClass>io.osirrc.ciff.olddog.ExportTermsToOldDogBulk</mainClass>
+              <id>ExportTermsToOldDogBulk</id>
+            </program>
           </programs>
         </configuration>
       </plugin>
