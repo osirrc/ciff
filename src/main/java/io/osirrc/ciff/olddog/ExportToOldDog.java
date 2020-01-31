@@ -55,8 +55,7 @@ public class ExportToOldDog {
     BufferedWriter dictWriter = new BufferedWriter(new FileWriter(args.dict));
 
     BufferedWriter termsWriter = null;
-    if (!args.terms.equals(""))
-    {
+    if (!args.terms.equals("")) {
       termsWriter = new BufferedWriter(new FileWriter(args.terms));
     }
     FileInputStream fileIn = new FileInputStream(args.postings);

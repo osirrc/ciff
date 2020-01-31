@@ -47,7 +47,7 @@ public class ExportTermsToOldDogBulk {
 
     BufferedInputStream fileIn = new BufferedInputStream(new FileInputStream(args.postings));
     int termID = 0;
-    ByteBuffer buffer = null;
+    ByteBuffer buffer;
     while (true) {
       CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
       if (pl == null) {
