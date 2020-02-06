@@ -14,6 +14,548 @@ public final class CommonIndexFileFormat {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  public interface HeaderOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:io.osirrc.ciff.Header)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 num_postings_lists = 1;</code>
+     */
+    int getNumPostingsLists();
+
+    /**
+     * <code>int32 num_docs = 2;</code>
+     */
+    int getNumDocs();
+  }
+  /**
+   * Protobuf type {@code io.osirrc.ciff.Header}
+   */
+  public  static final class Header extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:io.osirrc.ciff.Header)
+      HeaderOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Header.newBuilder() to construct.
+    private Header(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Header() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Header();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Header(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              numPostingsLists_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              numDocs_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_Header_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_Header_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.osirrc.ciff.CommonIndexFileFormat.Header.class, io.osirrc.ciff.CommonIndexFileFormat.Header.Builder.class);
+    }
+
+    public static final int NUM_POSTINGS_LISTS_FIELD_NUMBER = 1;
+    private int numPostingsLists_;
+    /**
+     * <code>int32 num_postings_lists = 1;</code>
+     */
+    public int getNumPostingsLists() {
+      return numPostingsLists_;
+    }
+
+    public static final int NUM_DOCS_FIELD_NUMBER = 2;
+    private int numDocs_;
+    /**
+     * <code>int32 num_docs = 2;</code>
+     */
+    public int getNumDocs() {
+      return numDocs_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (numPostingsLists_ != 0) {
+        output.writeInt32(1, numPostingsLists_);
+      }
+      if (numDocs_ != 0) {
+        output.writeInt32(2, numDocs_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (numPostingsLists_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, numPostingsLists_);
+      }
+      if (numDocs_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, numDocs_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof io.osirrc.ciff.CommonIndexFileFormat.Header)) {
+        return super.equals(obj);
+      }
+      io.osirrc.ciff.CommonIndexFileFormat.Header other = (io.osirrc.ciff.CommonIndexFileFormat.Header) obj;
+
+      if (getNumPostingsLists()
+          != other.getNumPostingsLists()) return false;
+      if (getNumDocs()
+          != other.getNumDocs()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + NUM_POSTINGS_LISTS_FIELD_NUMBER;
+      hash = (53 * hash) + getNumPostingsLists();
+      hash = (37 * hash) + NUM_DOCS_FIELD_NUMBER;
+      hash = (53 * hash) + getNumDocs();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(io.osirrc.ciff.CommonIndexFileFormat.Header prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code io.osirrc.ciff.Header}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:io.osirrc.ciff.Header)
+        io.osirrc.ciff.CommonIndexFileFormat.HeaderOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_Header_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_Header_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                io.osirrc.ciff.CommonIndexFileFormat.Header.class, io.osirrc.ciff.CommonIndexFileFormat.Header.Builder.class);
+      }
+
+      // Construct using io.osirrc.ciff.CommonIndexFileFormat.Header.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        numPostingsLists_ = 0;
+
+        numDocs_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_Header_descriptor;
+      }
+
+      @java.lang.Override
+      public io.osirrc.ciff.CommonIndexFileFormat.Header getDefaultInstanceForType() {
+        return io.osirrc.ciff.CommonIndexFileFormat.Header.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public io.osirrc.ciff.CommonIndexFileFormat.Header build() {
+        io.osirrc.ciff.CommonIndexFileFormat.Header result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public io.osirrc.ciff.CommonIndexFileFormat.Header buildPartial() {
+        io.osirrc.ciff.CommonIndexFileFormat.Header result = new io.osirrc.ciff.CommonIndexFileFormat.Header(this);
+        result.numPostingsLists_ = numPostingsLists_;
+        result.numDocs_ = numDocs_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof io.osirrc.ciff.CommonIndexFileFormat.Header) {
+          return mergeFrom((io.osirrc.ciff.CommonIndexFileFormat.Header)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(io.osirrc.ciff.CommonIndexFileFormat.Header other) {
+        if (other == io.osirrc.ciff.CommonIndexFileFormat.Header.getDefaultInstance()) return this;
+        if (other.getNumPostingsLists() != 0) {
+          setNumPostingsLists(other.getNumPostingsLists());
+        }
+        if (other.getNumDocs() != 0) {
+          setNumDocs(other.getNumDocs());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        io.osirrc.ciff.CommonIndexFileFormat.Header parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (io.osirrc.ciff.CommonIndexFileFormat.Header) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int numPostingsLists_ ;
+      /**
+       * <code>int32 num_postings_lists = 1;</code>
+       */
+      public int getNumPostingsLists() {
+        return numPostingsLists_;
+      }
+      /**
+       * <code>int32 num_postings_lists = 1;</code>
+       */
+      public Builder setNumPostingsLists(int value) {
+        
+        numPostingsLists_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 num_postings_lists = 1;</code>
+       */
+      public Builder clearNumPostingsLists() {
+        
+        numPostingsLists_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int numDocs_ ;
+      /**
+       * <code>int32 num_docs = 2;</code>
+       */
+      public int getNumDocs() {
+        return numDocs_;
+      }
+      /**
+       * <code>int32 num_docs = 2;</code>
+       */
+      public Builder setNumDocs(int value) {
+        
+        numDocs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 num_docs = 2;</code>
+       */
+      public Builder clearNumDocs() {
+        
+        numDocs_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:io.osirrc.ciff.Header)
+    }
+
+    // @@protoc_insertion_point(class_scope:io.osirrc.ciff.Header)
+    private static final io.osirrc.ciff.CommonIndexFileFormat.Header DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new io.osirrc.ciff.CommonIndexFileFormat.Header();
+    }
+
+    public static io.osirrc.ciff.CommonIndexFileFormat.Header getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Header>
+        PARSER = new com.google.protobuf.AbstractParser<Header>() {
+      @java.lang.Override
+      public Header parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Header(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Header> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Header> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public io.osirrc.ciff.CommonIndexFileFormat.Header getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface PostingOrBuilder extends
       // @@protoc_insertion_point(interface_extends:io.osirrc.ciff.Posting)
       com.google.protobuf.MessageOrBuilder {
@@ -581,27 +1123,27 @@ public final class CommonIndexFileFormat {
     long getCf();
 
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
     java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> 
-        getPostingList();
+        getPostingsList();
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    io.osirrc.ciff.CommonIndexFileFormat.Posting getPosting(int index);
+    io.osirrc.ciff.CommonIndexFileFormat.Posting getPostings(int index);
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    int getPostingCount();
+    int getPostingsCount();
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
     java.util.List<? extends io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder> 
-        getPostingOrBuilderList();
+        getPostingsOrBuilderList();
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder getPostingOrBuilder(
+    io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder getPostingsOrBuilder(
         int index);
   }
   /**
@@ -618,7 +1160,7 @@ public final class CommonIndexFileFormat {
     }
     private PostingsList() {
       term_ = "";
-      posting_ = java.util.Collections.emptyList();
+      postings_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -670,10 +1212,10 @@ public final class CommonIndexFileFormat {
             }
             case 34: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                posting_ = new java.util.ArrayList<io.osirrc.ciff.CommonIndexFileFormat.Posting>();
+                postings_ = new java.util.ArrayList<io.osirrc.ciff.CommonIndexFileFormat.Posting>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              posting_.add(
+              postings_.add(
                   input.readMessage(io.osirrc.ciff.CommonIndexFileFormat.Posting.parser(), extensionRegistry));
               break;
             }
@@ -693,7 +1235,7 @@ public final class CommonIndexFileFormat {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          posting_ = java.util.Collections.unmodifiableList(posting_);
+          postings_ = java.util.Collections.unmodifiableList(postings_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -764,39 +1306,39 @@ public final class CommonIndexFileFormat {
       return cf_;
     }
 
-    public static final int POSTING_FIELD_NUMBER = 4;
-    private java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> posting_;
+    public static final int POSTINGS_FIELD_NUMBER = 4;
+    private java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> postings_;
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    public java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> getPostingList() {
-      return posting_;
+    public java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> getPostingsList() {
+      return postings_;
     }
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
     public java.util.List<? extends io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder> 
-        getPostingOrBuilderList() {
-      return posting_;
+        getPostingsOrBuilderList() {
+      return postings_;
     }
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    public int getPostingCount() {
-      return posting_.size();
+    public int getPostingsCount() {
+      return postings_.size();
     }
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    public io.osirrc.ciff.CommonIndexFileFormat.Posting getPosting(int index) {
-      return posting_.get(index);
+    public io.osirrc.ciff.CommonIndexFileFormat.Posting getPostings(int index) {
+      return postings_.get(index);
     }
     /**
-     * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+     * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
      */
-    public io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder getPostingOrBuilder(
+    public io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder getPostingsOrBuilder(
         int index) {
-      return posting_.get(index);
+      return postings_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -822,8 +1364,8 @@ public final class CommonIndexFileFormat {
       if (cf_ != 0L) {
         output.writeInt64(3, cf_);
       }
-      for (int i = 0; i < posting_.size(); i++) {
-        output.writeMessage(4, posting_.get(i));
+      for (int i = 0; i < postings_.size(); i++) {
+        output.writeMessage(4, postings_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -845,9 +1387,9 @@ public final class CommonIndexFileFormat {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, cf_);
       }
-      for (int i = 0; i < posting_.size(); i++) {
+      for (int i = 0; i < postings_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, posting_.get(i));
+          .computeMessageSize(4, postings_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -870,8 +1412,8 @@ public final class CommonIndexFileFormat {
           != other.getDf()) return false;
       if (getCf()
           != other.getCf()) return false;
-      if (!getPostingList()
-          .equals(other.getPostingList())) return false;
+      if (!getPostingsList()
+          .equals(other.getPostingsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -891,9 +1433,9 @@ public final class CommonIndexFileFormat {
       hash = (37 * hash) + CF_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getCf());
-      if (getPostingCount() > 0) {
-        hash = (37 * hash) + POSTING_FIELD_NUMBER;
-        hash = (53 * hash) + getPostingList().hashCode();
+      if (getPostingsCount() > 0) {
+        hash = (37 * hash) + POSTINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getPostingsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1023,7 +1565,7 @@ public final class CommonIndexFileFormat {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getPostingFieldBuilder();
+          getPostingsFieldBuilder();
         }
       }
       @java.lang.Override
@@ -1035,11 +1577,11 @@ public final class CommonIndexFileFormat {
 
         cf_ = 0L;
 
-        if (postingBuilder_ == null) {
-          posting_ = java.util.Collections.emptyList();
+        if (postingsBuilder_ == null) {
+          postings_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          postingBuilder_.clear();
+          postingsBuilder_.clear();
         }
         return this;
       }
@@ -1071,14 +1613,14 @@ public final class CommonIndexFileFormat {
         result.term_ = term_;
         result.df_ = df_;
         result.cf_ = cf_;
-        if (postingBuilder_ == null) {
+        if (postingsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            posting_ = java.util.Collections.unmodifiableList(posting_);
+            postings_ = java.util.Collections.unmodifiableList(postings_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.posting_ = posting_;
+          result.postings_ = postings_;
         } else {
-          result.posting_ = postingBuilder_.build();
+          result.postings_ = postingsBuilder_.build();
         }
         onBuilt();
         return result;
@@ -1138,29 +1680,29 @@ public final class CommonIndexFileFormat {
         if (other.getCf() != 0L) {
           setCf(other.getCf());
         }
-        if (postingBuilder_ == null) {
-          if (!other.posting_.isEmpty()) {
-            if (posting_.isEmpty()) {
-              posting_ = other.posting_;
+        if (postingsBuilder_ == null) {
+          if (!other.postings_.isEmpty()) {
+            if (postings_.isEmpty()) {
+              postings_ = other.postings_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensurePostingIsMutable();
-              posting_.addAll(other.posting_);
+              ensurePostingsIsMutable();
+              postings_.addAll(other.postings_);
             }
             onChanged();
           }
         } else {
-          if (!other.posting_.isEmpty()) {
-            if (postingBuilder_.isEmpty()) {
-              postingBuilder_.dispose();
-              postingBuilder_ = null;
-              posting_ = other.posting_;
+          if (!other.postings_.isEmpty()) {
+            if (postingsBuilder_.isEmpty()) {
+              postingsBuilder_.dispose();
+              postingsBuilder_ = null;
+              postings_ = other.postings_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              postingBuilder_ = 
+              postingsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getPostingFieldBuilder() : null;
+                   getPostingsFieldBuilder() : null;
             } else {
-              postingBuilder_.addAllMessages(other.posting_);
+              postingsBuilder_.addAllMessages(other.postings_);
             }
           }
         }
@@ -1315,244 +1857,244 @@ public final class CommonIndexFileFormat {
         return this;
       }
 
-      private java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> posting_ =
+      private java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> postings_ =
         java.util.Collections.emptyList();
-      private void ensurePostingIsMutable() {
+      private void ensurePostingsIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          posting_ = new java.util.ArrayList<io.osirrc.ciff.CommonIndexFileFormat.Posting>(posting_);
+          postings_ = new java.util.ArrayList<io.osirrc.ciff.CommonIndexFileFormat.Posting>(postings_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          io.osirrc.ciff.CommonIndexFileFormat.Posting, io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder, io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder> postingBuilder_;
+          io.osirrc.ciff.CommonIndexFileFormat.Posting, io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder, io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder> postingsBuilder_;
 
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> getPostingList() {
-        if (postingBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(posting_);
+      public java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting> getPostingsList() {
+        if (postingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(postings_);
         } else {
-          return postingBuilder_.getMessageList();
+          return postingsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public int getPostingCount() {
-        if (postingBuilder_ == null) {
-          return posting_.size();
+      public int getPostingsCount() {
+        if (postingsBuilder_ == null) {
+          return postings_.size();
         } else {
-          return postingBuilder_.getCount();
+          return postingsBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public io.osirrc.ciff.CommonIndexFileFormat.Posting getPosting(int index) {
-        if (postingBuilder_ == null) {
-          return posting_.get(index);
+      public io.osirrc.ciff.CommonIndexFileFormat.Posting getPostings(int index) {
+        if (postingsBuilder_ == null) {
+          return postings_.get(index);
         } else {
-          return postingBuilder_.getMessage(index);
+          return postingsBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder setPosting(
+      public Builder setPostings(
           int index, io.osirrc.ciff.CommonIndexFileFormat.Posting value) {
-        if (postingBuilder_ == null) {
+        if (postingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePostingIsMutable();
-          posting_.set(index, value);
+          ensurePostingsIsMutable();
+          postings_.set(index, value);
           onChanged();
         } else {
-          postingBuilder_.setMessage(index, value);
+          postingsBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder setPosting(
+      public Builder setPostings(
           int index, io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder builderForValue) {
-        if (postingBuilder_ == null) {
-          ensurePostingIsMutable();
-          posting_.set(index, builderForValue.build());
+        if (postingsBuilder_ == null) {
+          ensurePostingsIsMutable();
+          postings_.set(index, builderForValue.build());
           onChanged();
         } else {
-          postingBuilder_.setMessage(index, builderForValue.build());
+          postingsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder addPosting(io.osirrc.ciff.CommonIndexFileFormat.Posting value) {
-        if (postingBuilder_ == null) {
+      public Builder addPostings(io.osirrc.ciff.CommonIndexFileFormat.Posting value) {
+        if (postingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePostingIsMutable();
-          posting_.add(value);
+          ensurePostingsIsMutable();
+          postings_.add(value);
           onChanged();
         } else {
-          postingBuilder_.addMessage(value);
+          postingsBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder addPosting(
+      public Builder addPostings(
           int index, io.osirrc.ciff.CommonIndexFileFormat.Posting value) {
-        if (postingBuilder_ == null) {
+        if (postingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensurePostingIsMutable();
-          posting_.add(index, value);
+          ensurePostingsIsMutable();
+          postings_.add(index, value);
           onChanged();
         } else {
-          postingBuilder_.addMessage(index, value);
+          postingsBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder addPosting(
+      public Builder addPostings(
           io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder builderForValue) {
-        if (postingBuilder_ == null) {
-          ensurePostingIsMutable();
-          posting_.add(builderForValue.build());
+        if (postingsBuilder_ == null) {
+          ensurePostingsIsMutable();
+          postings_.add(builderForValue.build());
           onChanged();
         } else {
-          postingBuilder_.addMessage(builderForValue.build());
+          postingsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder addPosting(
+      public Builder addPostings(
           int index, io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder builderForValue) {
-        if (postingBuilder_ == null) {
-          ensurePostingIsMutable();
-          posting_.add(index, builderForValue.build());
+        if (postingsBuilder_ == null) {
+          ensurePostingsIsMutable();
+          postings_.add(index, builderForValue.build());
           onChanged();
         } else {
-          postingBuilder_.addMessage(index, builderForValue.build());
+          postingsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder addAllPosting(
+      public Builder addAllPostings(
           java.lang.Iterable<? extends io.osirrc.ciff.CommonIndexFileFormat.Posting> values) {
-        if (postingBuilder_ == null) {
-          ensurePostingIsMutable();
+        if (postingsBuilder_ == null) {
+          ensurePostingsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, posting_);
+              values, postings_);
           onChanged();
         } else {
-          postingBuilder_.addAllMessages(values);
+          postingsBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder clearPosting() {
-        if (postingBuilder_ == null) {
-          posting_ = java.util.Collections.emptyList();
+      public Builder clearPostings() {
+        if (postingsBuilder_ == null) {
+          postings_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          postingBuilder_.clear();
+          postingsBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public Builder removePosting(int index) {
-        if (postingBuilder_ == null) {
-          ensurePostingIsMutable();
-          posting_.remove(index);
+      public Builder removePostings(int index) {
+        if (postingsBuilder_ == null) {
+          ensurePostingsIsMutable();
+          postings_.remove(index);
           onChanged();
         } else {
-          postingBuilder_.remove(index);
+          postingsBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder getPostingBuilder(
+      public io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder getPostingsBuilder(
           int index) {
-        return getPostingFieldBuilder().getBuilder(index);
+        return getPostingsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder getPostingOrBuilder(
+      public io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder getPostingsOrBuilder(
           int index) {
-        if (postingBuilder_ == null) {
-          return posting_.get(index);  } else {
-          return postingBuilder_.getMessageOrBuilder(index);
+        if (postingsBuilder_ == null) {
+          return postings_.get(index);  } else {
+          return postingsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
       public java.util.List<? extends io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder> 
-           getPostingOrBuilderList() {
-        if (postingBuilder_ != null) {
-          return postingBuilder_.getMessageOrBuilderList();
+           getPostingsOrBuilderList() {
+        if (postingsBuilder_ != null) {
+          return postingsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(posting_);
+          return java.util.Collections.unmodifiableList(postings_);
         }
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder addPostingBuilder() {
-        return getPostingFieldBuilder().addBuilder(
+      public io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder addPostingsBuilder() {
+        return getPostingsFieldBuilder().addBuilder(
             io.osirrc.ciff.CommonIndexFileFormat.Posting.getDefaultInstance());
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
-      public io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder addPostingBuilder(
+      public io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder addPostingsBuilder(
           int index) {
-        return getPostingFieldBuilder().addBuilder(
+        return getPostingsFieldBuilder().addBuilder(
             index, io.osirrc.ciff.CommonIndexFileFormat.Posting.getDefaultInstance());
       }
       /**
-       * <code>repeated .io.osirrc.ciff.Posting posting = 4;</code>
+       * <code>repeated .io.osirrc.ciff.Posting postings = 4;</code>
        */
       public java.util.List<io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder> 
-           getPostingBuilderList() {
-        return getPostingFieldBuilder().getBuilderList();
+           getPostingsBuilderList() {
+        return getPostingsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           io.osirrc.ciff.CommonIndexFileFormat.Posting, io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder, io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder> 
-          getPostingFieldBuilder() {
-        if (postingBuilder_ == null) {
-          postingBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getPostingsFieldBuilder() {
+        if (postingsBuilder_ == null) {
+          postingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               io.osirrc.ciff.CommonIndexFileFormat.Posting, io.osirrc.ciff.CommonIndexFileFormat.Posting.Builder, io.osirrc.ciff.CommonIndexFileFormat.PostingOrBuilder>(
-                  posting_,
+                  postings_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          posting_ = null;
+          postings_ = null;
         }
-        return postingBuilder_;
+        return postingsBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1607,6 +2149,690 @@ public final class CommonIndexFileFormat {
 
   }
 
+  public interface DocRecordOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:io.osirrc.ciff.DocRecord)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 docid = 1;</code>
+     */
+    int getDocid();
+
+    /**
+     * <code>string collection_docid = 2;</code>
+     */
+    java.lang.String getCollectionDocid();
+    /**
+     * <code>string collection_docid = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getCollectionDocidBytes();
+
+    /**
+     * <code>int32 doclength = 3;</code>
+     */
+    int getDoclength();
+  }
+  /**
+   * Protobuf type {@code io.osirrc.ciff.DocRecord}
+   */
+  public  static final class DocRecord extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:io.osirrc.ciff.DocRecord)
+      DocRecordOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use DocRecord.newBuilder() to construct.
+    private DocRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DocRecord() {
+      collectionDocid_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new DocRecord();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DocRecord(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              docid_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              collectionDocid_ = s;
+              break;
+            }
+            case 24: {
+
+              doclength_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_DocRecord_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_DocRecord_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.osirrc.ciff.CommonIndexFileFormat.DocRecord.class, io.osirrc.ciff.CommonIndexFileFormat.DocRecord.Builder.class);
+    }
+
+    public static final int DOCID_FIELD_NUMBER = 1;
+    private int docid_;
+    /**
+     * <code>int32 docid = 1;</code>
+     */
+    public int getDocid() {
+      return docid_;
+    }
+
+    public static final int COLLECTION_DOCID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object collectionDocid_;
+    /**
+     * <code>string collection_docid = 2;</code>
+     */
+    public java.lang.String getCollectionDocid() {
+      java.lang.Object ref = collectionDocid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        collectionDocid_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string collection_docid = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCollectionDocidBytes() {
+      java.lang.Object ref = collectionDocid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        collectionDocid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DOCLENGTH_FIELD_NUMBER = 3;
+    private int doclength_;
+    /**
+     * <code>int32 doclength = 3;</code>
+     */
+    public int getDoclength() {
+      return doclength_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (docid_ != 0) {
+        output.writeInt32(1, docid_);
+      }
+      if (!getCollectionDocidBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, collectionDocid_);
+      }
+      if (doclength_ != 0) {
+        output.writeInt32(3, doclength_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (docid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, docid_);
+      }
+      if (!getCollectionDocidBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, collectionDocid_);
+      }
+      if (doclength_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, doclength_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof io.osirrc.ciff.CommonIndexFileFormat.DocRecord)) {
+        return super.equals(obj);
+      }
+      io.osirrc.ciff.CommonIndexFileFormat.DocRecord other = (io.osirrc.ciff.CommonIndexFileFormat.DocRecord) obj;
+
+      if (getDocid()
+          != other.getDocid()) return false;
+      if (!getCollectionDocid()
+          .equals(other.getCollectionDocid())) return false;
+      if (getDoclength()
+          != other.getDoclength()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DOCID_FIELD_NUMBER;
+      hash = (53 * hash) + getDocid();
+      hash = (37 * hash) + COLLECTION_DOCID_FIELD_NUMBER;
+      hash = (53 * hash) + getCollectionDocid().hashCode();
+      hash = (37 * hash) + DOCLENGTH_FIELD_NUMBER;
+      hash = (53 * hash) + getDoclength();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(io.osirrc.ciff.CommonIndexFileFormat.DocRecord prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code io.osirrc.ciff.DocRecord}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:io.osirrc.ciff.DocRecord)
+        io.osirrc.ciff.CommonIndexFileFormat.DocRecordOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_DocRecord_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_DocRecord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                io.osirrc.ciff.CommonIndexFileFormat.DocRecord.class, io.osirrc.ciff.CommonIndexFileFormat.DocRecord.Builder.class);
+      }
+
+      // Construct using io.osirrc.ciff.CommonIndexFileFormat.DocRecord.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        docid_ = 0;
+
+        collectionDocid_ = "";
+
+        doclength_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return io.osirrc.ciff.CommonIndexFileFormat.internal_static_io_osirrc_ciff_DocRecord_descriptor;
+      }
+
+      @java.lang.Override
+      public io.osirrc.ciff.CommonIndexFileFormat.DocRecord getDefaultInstanceForType() {
+        return io.osirrc.ciff.CommonIndexFileFormat.DocRecord.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public io.osirrc.ciff.CommonIndexFileFormat.DocRecord build() {
+        io.osirrc.ciff.CommonIndexFileFormat.DocRecord result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public io.osirrc.ciff.CommonIndexFileFormat.DocRecord buildPartial() {
+        io.osirrc.ciff.CommonIndexFileFormat.DocRecord result = new io.osirrc.ciff.CommonIndexFileFormat.DocRecord(this);
+        result.docid_ = docid_;
+        result.collectionDocid_ = collectionDocid_;
+        result.doclength_ = doclength_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof io.osirrc.ciff.CommonIndexFileFormat.DocRecord) {
+          return mergeFrom((io.osirrc.ciff.CommonIndexFileFormat.DocRecord)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(io.osirrc.ciff.CommonIndexFileFormat.DocRecord other) {
+        if (other == io.osirrc.ciff.CommonIndexFileFormat.DocRecord.getDefaultInstance()) return this;
+        if (other.getDocid() != 0) {
+          setDocid(other.getDocid());
+        }
+        if (!other.getCollectionDocid().isEmpty()) {
+          collectionDocid_ = other.collectionDocid_;
+          onChanged();
+        }
+        if (other.getDoclength() != 0) {
+          setDoclength(other.getDoclength());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        io.osirrc.ciff.CommonIndexFileFormat.DocRecord parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (io.osirrc.ciff.CommonIndexFileFormat.DocRecord) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int docid_ ;
+      /**
+       * <code>int32 docid = 1;</code>
+       */
+      public int getDocid() {
+        return docid_;
+      }
+      /**
+       * <code>int32 docid = 1;</code>
+       */
+      public Builder setDocid(int value) {
+        
+        docid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 docid = 1;</code>
+       */
+      public Builder clearDocid() {
+        
+        docid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object collectionDocid_ = "";
+      /**
+       * <code>string collection_docid = 2;</code>
+       */
+      public java.lang.String getCollectionDocid() {
+        java.lang.Object ref = collectionDocid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          collectionDocid_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string collection_docid = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCollectionDocidBytes() {
+        java.lang.Object ref = collectionDocid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          collectionDocid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string collection_docid = 2;</code>
+       */
+      public Builder setCollectionDocid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        collectionDocid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string collection_docid = 2;</code>
+       */
+      public Builder clearCollectionDocid() {
+        
+        collectionDocid_ = getDefaultInstance().getCollectionDocid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string collection_docid = 2;</code>
+       */
+      public Builder setCollectionDocidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        collectionDocid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int doclength_ ;
+      /**
+       * <code>int32 doclength = 3;</code>
+       */
+      public int getDoclength() {
+        return doclength_;
+      }
+      /**
+       * <code>int32 doclength = 3;</code>
+       */
+      public Builder setDoclength(int value) {
+        
+        doclength_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 doclength = 3;</code>
+       */
+      public Builder clearDoclength() {
+        
+        doclength_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:io.osirrc.ciff.DocRecord)
+    }
+
+    // @@protoc_insertion_point(class_scope:io.osirrc.ciff.DocRecord)
+    private static final io.osirrc.ciff.CommonIndexFileFormat.DocRecord DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new io.osirrc.ciff.CommonIndexFileFormat.DocRecord();
+    }
+
+    public static io.osirrc.ciff.CommonIndexFileFormat.DocRecord getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DocRecord>
+        PARSER = new com.google.protobuf.AbstractParser<DocRecord>() {
+      @java.lang.Override
+      public DocRecord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new DocRecord(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DocRecord> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DocRecord> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public io.osirrc.ciff.CommonIndexFileFormat.DocRecord getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_io_osirrc_ciff_Header_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_osirrc_ciff_Header_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_io_osirrc_ciff_Posting_descriptor;
   private static final 
@@ -1617,6 +2843,11 @@ public final class CommonIndexFileFormat {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_osirrc_ciff_PostingsList_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_io_osirrc_ciff_DocRecord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_osirrc_ciff_DocRecord_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1627,28 +2858,43 @@ public final class CommonIndexFileFormat {
   static {
     java.lang.String[] descriptorData = {
       "\n-src/main/protobuf/CommonIndexFileForma" +
-      "t.proto\022\016io.osirrc.ciff\"$\n\007Posting\022\r\n\005do" +
-      "cid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"^\n\014PostingsList\022\014\n" +
-      "\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022\n\n\002cf\030\003 \001(\003\022(\n\007p" +
-      "osting\030\004 \003(\0132\027.io.osirrc.ciff.Postingb\006p" +
-      "roto3"
+      "t.proto\022\016io.osirrc.ciff\"6\n\006Header\022\032\n\022num" +
+      "_postings_lists\030\001 \001(\005\022\020\n\010num_docs\030\002 \001(\005\"" +
+      "$\n\007Posting\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n" +
+      "\014PostingsList\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022" +
+      "\n\n\002cf\030\003 \001(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirr" +
+      "c.ciff.Posting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001" +
+      "(\005\022\030\n\020collection_docid\030\002 \001(\t\022\021\n\tdoclengt" +
+      "h\030\003 \001(\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_io_osirrc_ciff_Posting_descriptor =
+    internal_static_io_osirrc_ciff_Header_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_io_osirrc_ciff_Header_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_io_osirrc_ciff_Header_descriptor,
+        new java.lang.String[] { "NumPostingsLists", "NumDocs", });
+    internal_static_io_osirrc_ciff_Posting_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_io_osirrc_ciff_Posting_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_io_osirrc_ciff_Posting_descriptor,
         new java.lang.String[] { "Docid", "Tf", });
     internal_static_io_osirrc_ciff_PostingsList_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_io_osirrc_ciff_PostingsList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_io_osirrc_ciff_PostingsList_descriptor,
-        new java.lang.String[] { "Term", "Df", "Cf", "Posting", });
+        new java.lang.String[] { "Term", "Df", "Cf", "Postings", });
+    internal_static_io_osirrc_ciff_DocRecord_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_io_osirrc_ciff_DocRecord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_io_osirrc_ciff_DocRecord_descriptor,
+        new java.lang.String[] { "Docid", "CollectionDocid", "Doclength", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

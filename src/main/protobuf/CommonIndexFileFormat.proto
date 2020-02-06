@@ -1,6 +1,11 @@
 syntax = "proto3";
 package io.osirrc.ciff;
 
+message Header {
+  int32 num_postings_lists = 1;
+  int32 num_docs = 2;
+}
+
 message Posting {
   int32 docid = 1;
   int32 tf = 2;
@@ -10,5 +15,11 @@ message PostingsList {
   string term = 1;
   int64 df = 2;
   int64 cf = 3;
-  repeated Posting posting = 4;
+  repeated Posting postings = 4;
+}
+
+message DocRecord {
+  int32 docid = 1;
+  string collection_docid = 2;
+  int32 doclength = 3;
 }

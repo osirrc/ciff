@@ -55,7 +55,7 @@ public class ExportTermsToOldDogBulk {
       }
       int docID = 0;
       for (int j=0; j< pl.getDf(); j++) {
-        docID += pl.getPosting(j).getDocid();
+        docID += pl.getPostings(j).getDocid();
 
         buffer = ByteBuffer.allocate(4).order(ByteOrder.nativeOrder());
         buffer.putInt(termID);
@@ -66,7 +66,7 @@ public class ExportTermsToOldDogBulk {
         docIDWriter.write(buffer.array());
 
         buffer = ByteBuffer.allocate(4).order(ByteOrder.nativeOrder());
-        buffer.putInt(pl.getPosting(j).getTf());
+        buffer.putInt(pl.getPostings(j).getTf());
         countWriter.write(buffer.array());
       }
       termID += 1;

@@ -10,11 +10,8 @@ import java.io.FileInputStream;
 
 public class ReadCIFF {
   public static class Args {
-    @Option(name = "-postings", metaVar = "[file]", required = true, usage = "postings file")
-    public String postings = "";
-
-    @Option(name = "-max", metaVar = "[int]", usage = "maximum number of postings to write")
-    public int max = 10;
+    @Option(name = "-input", metaVar = "[file]", required = true, usage = "postings file")
+    public String input = "";
   }
 
   public static void main(String[] argv) throws Exception {
@@ -30,24 +27,34 @@ public class ReadCIFF {
       return;
     }
 
-    FileInputStream fileIn = new FileInputStream(args.postings);
-    for (int i=0; i<args.max; i++ ) {
+    FileInputStream fileIn = new FileInputStream(args.input);
+    System.out.println("Reading header...");
+    CommonIndexFileFormat.Header header = CommonIndexFileFormat.Header.parseDelimitedFrom(fileIn);
+    System.out.println(String.format("Expecting %d postings lists and %d doc records in this export.",
+        header.getNumPostingsLists(), header.getNumDocs()));
+
+    for (int i=0; i<header.getNumPostingsLists(); i++ ) {
       CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
-      if (pl == null) {
-        // We've read all postings...
-        break;
-      }
-      System.out.print(String.format("term: '%s', df=%d, cf=%d", pl.getTerm(), pl.getDf(), pl.getCf()));
-
-      if (pl.getDf() != pl.getPostingCount()) {
+      if (pl.getDf() != pl.getPostingsCount()) {
         throw new RuntimeException(String.format(
-            "Unexpected number of postings! expected %d got %d", pl.getDf(), pl.getPostingCount()));
+            "Unexpected number of postings! expected %d got %d", pl.getDf(), pl.getPostingsCount()));
       }
 
-      for (int j=0; j< (pl.getDf() > 10 ? 10 : pl.getDf()); j++) {
-        System.out.print(String.format(" (%d, %d)", pl.getPosting(j).getDocid(), pl.getPosting(j).getTf()));
+      if (i % 100000 == 0) {
+        System.out.print(String.format("term: '%s', df=%d, cf=%d", pl.getTerm(), pl.getDf(), pl.getCf()));
+
+        for (int j = 0; j < (pl.getDf() > 10 ? 10 : pl.getDf()); j++) {
+          System.out.print(String.format(" (%d, %d)", pl.getPostings(j).getDocid(), pl.getPostings(j).getTf()));
+        }
+        System.out.println(pl.getDf() > 10 ? " ..." : "");
       }
-      System.out.println(pl.getDf() > 10 ? " ..." : "");
+    }
+
+    for (int i=0; i<header.getNumDocs(); i++) {
+      CommonIndexFileFormat.DocRecord docRecord = CommonIndexFileFormat.DocRecord.parseDelimitedFrom(fileIn);
+      if (i % 100000 == 0) {
+        System.out.println(String.format("%d\t%s\t%d", docRecord.getDocid(), docRecord.getCollectionDocid(), docRecord.getDoclength()));
+      }
     }
     fileIn.close();
   }
