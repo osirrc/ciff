@@ -41,9 +41,9 @@ public final class CommonIndexFileFormat {
      * Exactly the number of DocRecord messages that follow the PostingsList messages.
      * </pre>
      *
-     * <code>int32 num_doc_records = 3;</code>
+     * <code>int32 num_docs = 3;</code>
      */
-    int getNumDocRecords();
+    int getNumDocs();
 
     /**
      * <pre>
@@ -165,7 +165,7 @@ public final class CommonIndexFileFormat {
             }
             case 24: {
 
-              numDocRecords_ = input.readInt32();
+              numDocs_ = input.readInt32();
               break;
             }
             case 32: {
@@ -252,17 +252,17 @@ public final class CommonIndexFileFormat {
       return numPostingsLists_;
     }
 
-    public static final int NUM_DOC_RECORDS_FIELD_NUMBER = 3;
-    private int numDocRecords_;
+    public static final int NUM_DOCS_FIELD_NUMBER = 3;
+    private int numDocs_;
     /**
      * <pre>
      * Exactly the number of DocRecord messages that follow the PostingsList messages.
      * </pre>
      *
-     * <code>int32 num_doc_records = 3;</code>
+     * <code>int32 num_docs = 3;</code>
      */
-    public int getNumDocRecords() {
-      return numDocRecords_;
+    public int getNumDocs() {
+      return numDocs_;
     }
 
     public static final int TOTAL_POSTINGS_LISTS_FIELD_NUMBER = 4;
@@ -383,8 +383,8 @@ public final class CommonIndexFileFormat {
       if (numPostingsLists_ != 0) {
         output.writeInt32(2, numPostingsLists_);
       }
-      if (numDocRecords_ != 0) {
-        output.writeInt32(3, numDocRecords_);
+      if (numDocs_ != 0) {
+        output.writeInt32(3, numDocs_);
       }
       if (totalPostingsLists_ != 0) {
         output.writeInt32(4, totalPostingsLists_);
@@ -418,9 +418,9 @@ public final class CommonIndexFileFormat {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, numPostingsLists_);
       }
-      if (numDocRecords_ != 0) {
+      if (numDocs_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, numDocRecords_);
+          .computeInt32Size(3, numDocs_);
       }
       if (totalPostingsLists_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -460,8 +460,8 @@ public final class CommonIndexFileFormat {
           != other.getVersion()) return false;
       if (getNumPostingsLists()
           != other.getNumPostingsLists()) return false;
-      if (getNumDocRecords()
-          != other.getNumDocRecords()) return false;
+      if (getNumDocs()
+          != other.getNumDocs()) return false;
       if (getTotalPostingsLists()
           != other.getTotalPostingsLists()) return false;
       if (getTotalDocs()
@@ -488,8 +488,8 @@ public final class CommonIndexFileFormat {
       hash = (53 * hash) + getVersion();
       hash = (37 * hash) + NUM_POSTINGS_LISTS_FIELD_NUMBER;
       hash = (53 * hash) + getNumPostingsLists();
-      hash = (37 * hash) + NUM_DOC_RECORDS_FIELD_NUMBER;
-      hash = (53 * hash) + getNumDocRecords();
+      hash = (37 * hash) + NUM_DOCS_FIELD_NUMBER;
+      hash = (53 * hash) + getNumDocs();
       hash = (37 * hash) + TOTAL_POSTINGS_LISTS_FIELD_NUMBER;
       hash = (53 * hash) + getTotalPostingsLists();
       hash = (37 * hash) + TOTAL_DOCS_FIELD_NUMBER;
@@ -643,7 +643,7 @@ public final class CommonIndexFileFormat {
 
         numPostingsLists_ = 0;
 
-        numDocRecords_ = 0;
+        numDocs_ = 0;
 
         totalPostingsLists_ = 0;
 
@@ -683,7 +683,7 @@ public final class CommonIndexFileFormat {
         io.osirrc.ciff.CommonIndexFileFormat.Header result = new io.osirrc.ciff.CommonIndexFileFormat.Header(this);
         result.version_ = version_;
         result.numPostingsLists_ = numPostingsLists_;
-        result.numDocRecords_ = numDocRecords_;
+        result.numDocs_ = numDocs_;
         result.totalPostingsLists_ = totalPostingsLists_;
         result.totalDocs_ = totalDocs_;
         result.totalTermsInCollection_ = totalTermsInCollection_;
@@ -743,8 +743,8 @@ public final class CommonIndexFileFormat {
         if (other.getNumPostingsLists() != 0) {
           setNumPostingsLists(other.getNumPostingsLists());
         }
-        if (other.getNumDocRecords() != 0) {
-          setNumDocRecords(other.getNumDocRecords());
+        if (other.getNumDocs() != 0) {
+          setNumDocs(other.getNumDocs());
         }
         if (other.getTotalPostingsLists() != 0) {
           setTotalPostingsLists(other.getTotalPostingsLists());
@@ -867,27 +867,27 @@ public final class CommonIndexFileFormat {
         return this;
       }
 
-      private int numDocRecords_ ;
+      private int numDocs_ ;
       /**
        * <pre>
        * Exactly the number of DocRecord messages that follow the PostingsList messages.
        * </pre>
        *
-       * <code>int32 num_doc_records = 3;</code>
+       * <code>int32 num_docs = 3;</code>
        */
-      public int getNumDocRecords() {
-        return numDocRecords_;
+      public int getNumDocs() {
+        return numDocs_;
       }
       /**
        * <pre>
        * Exactly the number of DocRecord messages that follow the PostingsList messages.
        * </pre>
        *
-       * <code>int32 num_doc_records = 3;</code>
+       * <code>int32 num_docs = 3;</code>
        */
-      public Builder setNumDocRecords(int value) {
+      public Builder setNumDocs(int value) {
         
-        numDocRecords_ = value;
+        numDocs_ = value;
         onChanged();
         return this;
       }
@@ -896,11 +896,11 @@ public final class CommonIndexFileFormat {
        * Exactly the number of DocRecord messages that follow the PostingsList messages.
        * </pre>
        *
-       * <code>int32 num_doc_records = 3;</code>
+       * <code>int32 num_docs = 3;</code>
        */
-      public Builder clearNumDocRecords() {
+      public Builder clearNumDocs() {
         
-        numDocRecords_ = 0;
+        numDocs_ = 0;
         onChanged();
         return this;
       }
@@ -3687,18 +3687,18 @@ public final class CommonIndexFileFormat {
   static {
     java.lang.String[] descriptorData = {
       "\n-src/main/protobuf/CommonIndexFileForma" +
-      "t.proto\022\016io.osirrc.ciff\"\323\001\n\006Header\022\017\n\007ve" +
+      "t.proto\022\016io.osirrc.ciff\"\314\001\n\006Header\022\017\n\007ve" +
       "rsion\030\001 \001(\005\022\032\n\022num_postings_lists\030\002 \001(\005\022" +
-      "\027\n\017num_doc_records\030\003 \001(\005\022\034\n\024total_postin" +
-      "gs_lists\030\004 \001(\005\022\022\n\ntotal_docs\030\005 \001(\005\022!\n\031to" +
-      "tal_terms_in_collection\030\006 \001(\003\022\031\n\021average" +
-      "_doclength\030\007 \001(\001\022\023\n\013description\030\010 \001(\t\"$\n" +
-      "\007Posting\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n\014P" +
-      "ostingsList\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022\n\n" +
-      "\002cf\030\003 \001(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirrc." +
-      "ciff.Posting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001(\005" +
-      "\022\030\n\020collection_docid\030\002 \001(\t\022\021\n\tdoclength\030" +
-      "\003 \001(\005b\006proto3"
+      "\020\n\010num_docs\030\003 \001(\005\022\034\n\024total_postings_list" +
+      "s\030\004 \001(\005\022\022\n\ntotal_docs\030\005 \001(\005\022!\n\031total_ter" +
+      "ms_in_collection\030\006 \001(\003\022\031\n\021average_doclen" +
+      "gth\030\007 \001(\001\022\023\n\013description\030\010 \001(\t\"$\n\007Postin" +
+      "g\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n\014Postings" +
+      "List\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022\n\n\002cf\030\003 \001" +
+      "(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirrc.ciff.Po" +
+      "sting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001(\005\022\030\n\020col" +
+      "lection_docid\030\002 \001(\t\022\021\n\tdoclength\030\003 \001(\005b\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3709,7 +3709,7 @@ public final class CommonIndexFileFormat {
     internal_static_io_osirrc_ciff_Header_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_io_osirrc_ciff_Header_descriptor,
-        new java.lang.String[] { "Version", "NumPostingsLists", "NumDocRecords", "TotalPostingsLists", "TotalDocs", "TotalTermsInCollection", "AverageDoclength", "Description", });
+        new java.lang.String[] { "Version", "NumPostingsLists", "NumDocs", "TotalPostingsLists", "TotalDocs", "TotalTermsInCollection", "AverageDoclength", "Description", });
     internal_static_io_osirrc_ciff_Posting_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_io_osirrc_ciff_Posting_fieldAccessorTable = new

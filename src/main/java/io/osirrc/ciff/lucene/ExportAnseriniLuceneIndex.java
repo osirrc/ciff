@@ -129,7 +129,7 @@ public class ExportAnseriniLuceneIndex {
     Header.newBuilder()
         .setVersion(CommonIndexFileFormatConstants.VERSION)
         .setNumPostingsLists(counts.export)
-        .setNumDocRecords(reader.maxDoc())   // We're exporting all docs.
+        .setNumDocs(reader.maxDoc())   // We're exporting all docs.
         .setTotalPostingsLists(counts.total)
         .setTotalDocs(reader.maxDoc())
         .setTotalTermsInCollection(reader.getSumTotalTermFreq(args.contentsField))

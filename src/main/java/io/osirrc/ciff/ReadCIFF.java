@@ -34,7 +34,7 @@ public class ReadCIFF {
     System.out.println("=== Header === ");
     System.out.println(String.format("version: %d", header.getVersion()));
     System.out.println(String.format("num_postings_lists: %d", header.getNumPostingsLists()));
-    System.out.println(String.format("num_doc_records: %d", header.getNumDocRecords()));
+    System.out.println(String.format("num_doc_records: %d", header.getNumDocs()));
     System.out.println(String.format("total_postings_lists: %d", header.getTotalPostingsLists()));
     System.out.println(String.format("total_docs: %d", header.getTotalDocs()));
     System.out.println(String.format("total_terms_in_collection: %d", header.getTotalTermsInCollection()));
@@ -43,7 +43,7 @@ public class ReadCIFF {
     System.out.println("");
 
     System.out.println(String.format("Expecting %d postings lists and %d doc records in this export.",
-        header.getNumPostingsLists(), header.getNumDocRecords()));
+        header.getNumPostingsLists(), header.getNumDocs()));
 
     for (int i=0; i<header.getNumPostingsLists(); i++ ) {
       CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
@@ -62,7 +62,7 @@ public class ReadCIFF {
       }
     }
 
-    for (int i=0; i<header.getNumDocRecords(); i++) {
+    for (int i=0; i<header.getNumDocs(); i++) {
       CommonIndexFileFormat.DocRecord docRecord = CommonIndexFileFormat.DocRecord.parseDelimitedFrom(fileIn);
       if (i % 100000 == 0) {
         System.out.println(String.format("%d\t%s\t%d", docRecord.getDocid(), docRecord.getCollectionDocid(), docRecord.getDoclength()));

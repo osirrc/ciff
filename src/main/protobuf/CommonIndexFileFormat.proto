@@ -13,7 +13,7 @@ message Header {
   int32 version = 1;              // Version.
 
   int32 num_postings_lists = 2;   // Exactly the number of PostingsList messages that follow the Header.
-  int32 num_doc_records = 3;      // Exactly the number of DocRecord messages that follow the PostingsList messages.
+  int32 num_docs = 3;             // Exactly the number of DocRecord messages that follow the PostingsList messages.
 
   // The total number of postings lists in the collection; the vocabulary size. This might differ from
   // num_postings_lists, for example, because we only export the postings lists of query terms.
