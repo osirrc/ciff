@@ -21,23 +21,23 @@ import org.kohsuke.args4j.ParserProperties;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static io.osirrc.ciff.CommonIndexFileFormat.DocRecord;
+import static io.osirrc.ciff.CommonIndexFileFormat.Header;
 import static io.osirrc.ciff.CommonIndexFileFormat.Posting;
 import static io.osirrc.ciff.CommonIndexFileFormat.PostingsList;
 import static io.osirrc.ciff.CommonIndexFileFormat.PostingsListOrBuilder;
 
 public class DumpLuceneIndex {
   public static class Args {
-    @Option(name = "-postingsOutput", metaVar = "[file]", required = true, usage = "postings output")
-    public String postingsOutput = "";
-
-    @Option(name = "-docsOutput", metaVar = "[file]", required = true, usage = "docid output")
-    public String docsOutput = "";
+    @Option(name = "-output", metaVar = "[file]", required = true, usage = "postings output")
+    public String output = "";
 
     @Option(name = "-index", metaVar = "[path]", required = true, usage = "index path")
     public String index = "";
@@ -45,14 +45,32 @@ public class DumpLuceneIndex {
     @Option(name = "-termsFile", metaVar = "[file]", usage = "file containing terms to dump")
     public String termsFile = null;
 
-    @Option(name = "-max", metaVar = "[int]", usage = "maximum number of postings to write")
-    public int max = Integer.MAX_VALUE;
-
     @Option(name = "-contentsField", metaVar = "[field name]", usage = "name of the 'contents' field")
     public String contentsField = "contents";
 
     @Option(name = "-docidField", metaVar = "[field name]", usage = "name of the 'docid' field")
     public String docidsField = "id";
+  }
+
+  public static int countPostingsLists(IndexReader reader, String field, Set<String> terms) throws IOException {
+    int cnt = 0;
+    LeafReader leafReader = reader.leaves().get(0).reader();
+    TermsEnum termsEnum = leafReader.terms(field).iterator();
+    BytesRef bytesRef = termsEnum.next();
+    while (bytesRef != null) {
+      // This is the current term in the dictionary.
+      String token = bytesRef.utf8ToString();
+
+      if (terms != null && !terms.contains(token)) {
+        bytesRef = termsEnum.next();
+        continue;
+      }
+
+      bytesRef = termsEnum.next();
+      cnt++;
+    }
+
+    return cnt;
   }
 
   public static void main(String[] argv) throws Exception {
@@ -68,6 +86,7 @@ public class DumpLuceneIndex {
       return;
     }
 
+    // If specified, load the query terms
     Set<String> terms = null;
     if (args.termsFile != null) {
       terms = new HashSet<>();
@@ -79,16 +98,25 @@ public class DumpLuceneIndex {
         line = reader.readLine();
       }
       reader.close();
-      System.out.println(String.format("Loaded termsFile, only dumping postings for %d specified terms.",
-          terms.size()));
+      System.out.println(String.format("Loaded termsFile, only dumping postings for %d specified terms.", terms.size()));
     }
 
     IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(args.index)));
+    FileOutputStream fileOut = new FileOutputStream(args.output);
 
-    System.out.println("Writing postings...");
-    FileOutputStream fileOut = new FileOutputStream(args.postingsOutput);
+    // Go through the index once to count the number of postings lists we're going to export.
+    // We need this value to populate the header.
+    System.out.println("Taking a pass through the index to count the number of postings to export...");
+    int expectedPostingsLists = countPostingsLists(reader, args.contentsField, terms);
+    System.out.println(String.format("%d postings lists expected.", expectedPostingsLists));
+
+    // Write the header.
+    System.out.println("Writing the header...");
+    Header.newBuilder().setNumPostingsLists(expectedPostingsLists).setNumDocs(
+        reader.maxDoc()).build().writeDelimitedTo(fileOut);
+
+    // Now we can write the postings lists.
     int cnt = 0;
-    // This is how you iterate through terms in the postings list.
     LeafReader leafReader = reader.leaves().get(0).reader();
     TermsEnum termsEnum = leafReader.terms(args.contentsField).iterator();
     BytesRef bytesRef = termsEnum.next();
@@ -119,8 +147,7 @@ public class DumpLuceneIndex {
         // gap (i.e., delta) encoding.
         int code = prevDocid == -1 ? curDocid : curDocid - prevDocid;
 
-        //System.out.print(String.format(" (%s, %s, %s)", postingsEnum.docID(), postingsEnum.freq(), code));
-        ((PostingsList.Builder) plBuilder).addPosting(
+        ((PostingsList.Builder) plBuilder).addPostings(
             Posting.newBuilder().setDocid(code).setTf(postingsEnum.freq()).build());
         postingsWritten++;
         prevDocid = curDocid;
@@ -136,16 +163,13 @@ public class DumpLuceneIndex {
       bytesRef = termsEnum.next();
 
       cnt++;
-      if ( cnt > args.max) {
-        break;
-      }
-      if (cnt % 10000 == 0) {
-        System.out.println("Wrote " + cnt + " postings...");
+      if (cnt % 100000 == 0) {
+        System.out.println("Wrote " + cnt + " postings lists...");
       }
     }
-    System.out.println("Total of " + cnt + " postings written.");
-    fileOut.close();
+    System.out.println("Total of " + cnt + " postings lists written.");
 
+    // Read the doclengths (norms) into memory
     Map<Integer, Integer> normsMap = new HashMap<>();
     System.out.println("Reading norms into memory...");
     for (LeafReaderContext context : reader.leaves()) {
@@ -157,18 +181,25 @@ public class DumpLuceneIndex {
     }
     System.out.println("Done!");
 
-    System.out.println("Writing docids...");
-    FileOutputStream docsOut = new FileOutputStream(args.docsOutput);
+    // Write the doc records: (docid, collection docid, doclength)
+    System.out.println("Writing doc records...");
     for (int i=0; i<reader.maxDoc(); i++) {
       if (!normsMap.containsKey(i)) {
         throw new Exception(String.format("Norm doesn't exist for docid %d!", i));
       }
-      docsOut.write((i + "\t" + reader.document(i).getField(args.docidsField).stringValue() +
-          "\t" + normsMap.get(i) + "\n").getBytes());
+      DocRecord.newBuilder()
+          .setDocid(i)
+          .setCollectionDocid(reader.document(i).getField(args.docidsField).stringValue())
+          .setDoclength(normsMap.get(i))
+          .build().writeDelimitedTo(fileOut);
+
+      if (i % 100000 == 0 && i != 0) {
+        System.out.println("Wrote " + i + " doc records...");
+      }
     }
-    docsOut.close();
     System.out.println("Done!");
 
+    fileOut.close();
     reader.close();
   }
 }

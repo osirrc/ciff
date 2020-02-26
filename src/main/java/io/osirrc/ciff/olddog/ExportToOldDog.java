@@ -71,8 +71,8 @@ public class ExportToOldDog {
       if (termsWriter != null) {
         long docID = 0;
         for (int j=0; j< pl.getDf(); j++) {
-          docID += pl.getPosting(j).getDocid();
-          termsWriter.write(Long.toString(termID) + '|' + docID + '|' + Long.toString(pl.getPosting(j).getTf()));
+          docID += pl.getPostings(j).getDocid();
+          termsWriter.write(Long.toString(termID) + '|' + docID + '|' + Long.toString(pl.getPostings(j).getTf()));
           termsWriter.newLine();
         }
       }
