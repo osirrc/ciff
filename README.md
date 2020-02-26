@@ -52,6 +52,6 @@ target/appassembler/bin/ReadCIFF -postings robust04-postings-queries-only.pb -ma
 Once we have exported a Lucene index, it can be ingested into a number of different search systems.
 
 
-+ [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/common-index-format) (includes Python and Rust versions).
++ [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff) (includes Python and Rust versions).
 
 
