@@ -129,7 +129,7 @@ public class ExportAnseriniLuceneIndex {
         .setVersion(1)
         .setNumPostingsLists(counts.export)
         .setNumDocRecords(reader.maxDoc())   // We're exporting all docs.
-        .setTotalPostingsList(counts.total)
+        .setTotalPostingsLists(counts.total)
         .setTotalDocs(reader.maxDoc())
         .setTotalTermsInCollection(reader.getSumTotalTermFreq(args.contentsField))
         .setAverageDoclength((double) reader.getSumTotalTermFreq(args.contentsField) / reader.maxDoc())

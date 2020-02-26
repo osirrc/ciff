@@ -35,7 +35,7 @@ public class ReadCIFF {
     System.out.println(String.format("version: %d", header.getVersion()));
     System.out.println(String.format("num_postings_lists: %d", header.getNumPostingsLists()));
     System.out.println(String.format("num_doc_records: %d", header.getNumDocRecords()));
-    System.out.println(String.format("total_postings_list: %d", header.getTotalPostingsList()));
+    System.out.println(String.format("total_postings_list: %d", header.getTotalPostingsLists()));
     System.out.println(String.format("total_docs: %d", header.getTotalDocs()));
     System.out.println(String.format("total_terms_in_collection: %d", header.getTotalTermsInCollection()));
     System.out.println(String.format("average_doclength: %f", header.getAverageDoclength()));

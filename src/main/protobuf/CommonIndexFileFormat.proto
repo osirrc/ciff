@@ -17,7 +17,7 @@ message Header {
 
   // The total number of postings lists in the collection; the vocabulary size. This might differ from
   // num_postings_lists, for example, because we only export the postings lists of query terms.
-  int32 total_postings_list = 4;
+  int32 total_postings_lists = 4;
 
   // The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
   int32 total_docs = 5;

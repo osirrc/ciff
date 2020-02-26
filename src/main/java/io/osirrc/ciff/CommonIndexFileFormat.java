@@ -51,9 +51,9 @@ public final class CommonIndexFileFormat {
      * num_postings_lists, for example, because we only export the postings lists of query terms.
      * </pre>
      *
-     * <code>int32 total_postings_list = 4;</code>
+     * <code>int32 total_postings_lists = 4;</code>
      */
-    int getTotalPostingsList();
+    int getTotalPostingsLists();
 
     /**
      * <pre>
@@ -170,7 +170,7 @@ public final class CommonIndexFileFormat {
             }
             case 32: {
 
-              totalPostingsList_ = input.readInt32();
+              totalPostingsLists_ = input.readInt32();
               break;
             }
             case 40: {
@@ -265,18 +265,18 @@ public final class CommonIndexFileFormat {
       return numDocRecords_;
     }
 
-    public static final int TOTAL_POSTINGS_LIST_FIELD_NUMBER = 4;
-    private int totalPostingsList_;
+    public static final int TOTAL_POSTINGS_LISTS_FIELD_NUMBER = 4;
+    private int totalPostingsLists_;
     /**
      * <pre>
      * The total number of postings lists in the collection; the vocabulary size. This might differ from
      * num_postings_lists, for example, because we only export the postings lists of query terms.
      * </pre>
      *
-     * <code>int32 total_postings_list = 4;</code>
+     * <code>int32 total_postings_lists = 4;</code>
      */
-    public int getTotalPostingsList() {
-      return totalPostingsList_;
+    public int getTotalPostingsLists() {
+      return totalPostingsLists_;
     }
 
     public static final int TOTAL_DOCS_FIELD_NUMBER = 5;
@@ -386,8 +386,8 @@ public final class CommonIndexFileFormat {
       if (numDocRecords_ != 0) {
         output.writeInt32(3, numDocRecords_);
       }
-      if (totalPostingsList_ != 0) {
-        output.writeInt32(4, totalPostingsList_);
+      if (totalPostingsLists_ != 0) {
+        output.writeInt32(4, totalPostingsLists_);
       }
       if (totalDocs_ != 0) {
         output.writeInt32(5, totalDocs_);
@@ -422,9 +422,9 @@ public final class CommonIndexFileFormat {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, numDocRecords_);
       }
-      if (totalPostingsList_ != 0) {
+      if (totalPostingsLists_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, totalPostingsList_);
+          .computeInt32Size(4, totalPostingsLists_);
       }
       if (totalDocs_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -462,8 +462,8 @@ public final class CommonIndexFileFormat {
           != other.getNumPostingsLists()) return false;
       if (getNumDocRecords()
           != other.getNumDocRecords()) return false;
-      if (getTotalPostingsList()
-          != other.getTotalPostingsList()) return false;
+      if (getTotalPostingsLists()
+          != other.getTotalPostingsLists()) return false;
       if (getTotalDocs()
           != other.getTotalDocs()) return false;
       if (getTotalTermsInCollection()
@@ -490,8 +490,8 @@ public final class CommonIndexFileFormat {
       hash = (53 * hash) + getNumPostingsLists();
       hash = (37 * hash) + NUM_DOC_RECORDS_FIELD_NUMBER;
       hash = (53 * hash) + getNumDocRecords();
-      hash = (37 * hash) + TOTAL_POSTINGS_LIST_FIELD_NUMBER;
-      hash = (53 * hash) + getTotalPostingsList();
+      hash = (37 * hash) + TOTAL_POSTINGS_LISTS_FIELD_NUMBER;
+      hash = (53 * hash) + getTotalPostingsLists();
       hash = (37 * hash) + TOTAL_DOCS_FIELD_NUMBER;
       hash = (53 * hash) + getTotalDocs();
       hash = (37 * hash) + TOTAL_TERMS_IN_COLLECTION_FIELD_NUMBER;
@@ -645,7 +645,7 @@ public final class CommonIndexFileFormat {
 
         numDocRecords_ = 0;
 
-        totalPostingsList_ = 0;
+        totalPostingsLists_ = 0;
 
         totalDocs_ = 0;
 
@@ -684,7 +684,7 @@ public final class CommonIndexFileFormat {
         result.version_ = version_;
         result.numPostingsLists_ = numPostingsLists_;
         result.numDocRecords_ = numDocRecords_;
-        result.totalPostingsList_ = totalPostingsList_;
+        result.totalPostingsLists_ = totalPostingsLists_;
         result.totalDocs_ = totalDocs_;
         result.totalTermsInCollection_ = totalTermsInCollection_;
         result.averageDoclength_ = averageDoclength_;
@@ -746,8 +746,8 @@ public final class CommonIndexFileFormat {
         if (other.getNumDocRecords() != 0) {
           setNumDocRecords(other.getNumDocRecords());
         }
-        if (other.getTotalPostingsList() != 0) {
-          setTotalPostingsList(other.getTotalPostingsList());
+        if (other.getTotalPostingsLists() != 0) {
+          setTotalPostingsLists(other.getTotalPostingsLists());
         }
         if (other.getTotalDocs() != 0) {
           setTotalDocs(other.getTotalDocs());
@@ -905,17 +905,17 @@ public final class CommonIndexFileFormat {
         return this;
       }
 
-      private int totalPostingsList_ ;
+      private int totalPostingsLists_ ;
       /**
        * <pre>
        * The total number of postings lists in the collection; the vocabulary size. This might differ from
        * num_postings_lists, for example, because we only export the postings lists of query terms.
        * </pre>
        *
-       * <code>int32 total_postings_list = 4;</code>
+       * <code>int32 total_postings_lists = 4;</code>
        */
-      public int getTotalPostingsList() {
-        return totalPostingsList_;
+      public int getTotalPostingsLists() {
+        return totalPostingsLists_;
       }
       /**
        * <pre>
@@ -923,11 +923,11 @@ public final class CommonIndexFileFormat {
        * num_postings_lists, for example, because we only export the postings lists of query terms.
        * </pre>
        *
-       * <code>int32 total_postings_list = 4;</code>
+       * <code>int32 total_postings_lists = 4;</code>
        */
-      public Builder setTotalPostingsList(int value) {
+      public Builder setTotalPostingsLists(int value) {
         
-        totalPostingsList_ = value;
+        totalPostingsLists_ = value;
         onChanged();
         return this;
       }
@@ -937,11 +937,11 @@ public final class CommonIndexFileFormat {
        * num_postings_lists, for example, because we only export the postings lists of query terms.
        * </pre>
        *
-       * <code>int32 total_postings_list = 4;</code>
+       * <code>int32 total_postings_lists = 4;</code>
        */
-      public Builder clearTotalPostingsList() {
+      public Builder clearTotalPostingsLists() {
         
-        totalPostingsList_ = 0;
+        totalPostingsLists_ = 0;
         onChanged();
         return this;
       }
@@ -3687,18 +3687,18 @@ public final class CommonIndexFileFormat {
   static {
     java.lang.String[] descriptorData = {
       "\n-src/main/protobuf/CommonIndexFileForma" +
-      "t.proto\022\016io.osirrc.ciff\"\322\001\n\006Header\022\017\n\007ve" +
+      "t.proto\022\016io.osirrc.ciff\"\323\001\n\006Header\022\017\n\007ve" +
       "rsion\030\001 \001(\005\022\032\n\022num_postings_lists\030\002 \001(\005\022" +
-      "\027\n\017num_doc_records\030\003 \001(\005\022\033\n\023total_postin" +
-      "gs_list\030\004 \001(\005\022\022\n\ntotal_docs\030\005 \001(\005\022!\n\031tot" +
-      "al_terms_in_collection\030\006 \001(\003\022\031\n\021average_" +
-      "doclength\030\007 \001(\001\022\023\n\013description\030\010 \001(\t\"$\n\007" +
-      "Posting\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n\014Po" +
-      "stingsList\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022\n\n\002" +
-      "cf\030\003 \001(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirrc.c" +
-      "iff.Posting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001(\005\022" +
-      "\030\n\020collection_docid\030\002 \001(\t\022\021\n\tdoclength\030\003" +
-      " \001(\005b\006proto3"
+      "\027\n\017num_doc_records\030\003 \001(\005\022\034\n\024total_postin" +
+      "gs_lists\030\004 \001(\005\022\022\n\ntotal_docs\030\005 \001(\005\022!\n\031to" +
+      "tal_terms_in_collection\030\006 \001(\003\022\031\n\021average" +
+      "_doclength\030\007 \001(\001\022\023\n\013description\030\010 \001(\t\"$\n" +
+      "\007Posting\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n\014P" +
+      "ostingsList\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022\n\n" +
+      "\002cf\030\003 \001(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirrc." +
+      "ciff.Posting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001(\005" +
+      "\022\030\n\020collection_docid\030\002 \001(\t\022\021\n\tdoclength\030" +
+      "\003 \001(\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3709,7 +3709,7 @@ public final class CommonIndexFileFormat {
     internal_static_io_osirrc_ciff_Header_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_io_osirrc_ciff_Header_descriptor,
-        new java.lang.String[] { "Version", "NumPostingsLists", "NumDocRecords", "TotalPostingsList", "TotalDocs", "TotalTermsInCollection", "AverageDoclength", "Description", });
+        new java.lang.String[] { "Version", "NumPostingsLists", "NumDocRecords", "TotalPostingsLists", "TotalDocs", "TotalTermsInCollection", "AverageDoclength", "Description", });
     internal_static_io_osirrc_ciff_Posting_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_io_osirrc_ciff_Posting_fieldAccessorTable = new
