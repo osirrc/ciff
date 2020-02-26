@@ -1,5 +1,6 @@
 package io.osirrc.ciff.lucene;
 
+import io.osirrc.ciff.CommonIndexFileFormatConstants;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.LeafReader;
@@ -126,7 +127,7 @@ public class ExportAnseriniLuceneIndex {
     // Write the header.
     System.out.println("Writing the header...");
     Header.newBuilder()
-        .setVersion(1)
+        .setVersion(CommonIndexFileFormatConstants.VERSION)
         .setNumPostingsLists(counts.export)
         .setNumDocRecords(reader.maxDoc())   // We're exporting all docs.
         .setTotalPostingsLists(counts.total)
