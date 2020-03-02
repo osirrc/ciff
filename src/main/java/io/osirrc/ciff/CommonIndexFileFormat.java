@@ -19,95 +19,16 @@ public final class CommonIndexFileFormat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     * Version.
-     * </pre>
-     *
-     * <code>int32 version = 1;</code>
-     */
-    int getVersion();
-
-    /**
-     * <pre>
-     * Exactly the number of PostingsList messages that follow the Header.
-     * </pre>
-     *
-     * <code>int32 num_postings_lists = 2;</code>
+     * <code>int32 num_postings_lists = 1;</code>
      */
     int getNumPostingsLists();
 
     /**
-     * <pre>
-     * Exactly the number of DocRecord messages that follow the PostingsList messages.
-     * </pre>
-     *
-     * <code>int32 num_docs = 3;</code>
+     * <code>int32 num_docs = 2;</code>
      */
     int getNumDocs();
-
-    /**
-     * <pre>
-     * The total number of postings lists in the collection; the vocabulary size. This might differ from
-     * num_postings_lists, for example, because we only export the postings lists of query terms.
-     * </pre>
-     *
-     * <code>int32 total_postings_lists = 4;</code>
-     */
-    int getTotalPostingsLists();
-
-    /**
-     * <pre>
-     * The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
-     * </pre>
-     *
-     * <code>int32 total_docs = 5;</code>
-     */
-    int getTotalDocs();
-
-    /**
-     * <pre>
-     * The total number of terms in the entire collection.
-     * </pre>
-     *
-     * <code>int64 total_terms_in_collection = 6;</code>
-     */
-    long getTotalTermsInCollection();
-
-    /**
-     * <pre>
-     * The average document length. We store this value explicitly in case the exporting application wants a particular
-     * level of precision.
-     * </pre>
-     *
-     * <code>double average_doclength = 7;</code>
-     */
-    double getAverageDoclength();
-
-    /**
-     * <pre>
-     * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-     * document processing and tokenization pipeline, etc.
-     * </pre>
-     *
-     * <code>string description = 8;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <pre>
-     * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-     * document processing and tokenization pipeline, etc.
-     * </pre>
-     *
-     * <code>string description = 8;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
   }
   /**
-   * <pre>
-   * This is the CIFF header. It always comes first.
-   * </pre>
-   *
    * Protobuf type {@code io.osirrc.ciff.Header}
    */
   public  static final class Header extends
@@ -120,7 +41,6 @@ public final class CommonIndexFileFormat {
       super(builder);
     }
     private Header() {
-      description_ = "";
     }
 
     @java.lang.Override
@@ -155,43 +75,12 @@ public final class CommonIndexFileFormat {
               break;
             case 8: {
 
-              version_ = input.readInt32();
+              numPostingsLists_ = input.readInt32();
               break;
             }
             case 16: {
 
-              numPostingsLists_ = input.readInt32();
-              break;
-            }
-            case 24: {
-
               numDocs_ = input.readInt32();
-              break;
-            }
-            case 32: {
-
-              totalPostingsLists_ = input.readInt32();
-              break;
-            }
-            case 40: {
-
-              totalDocs_ = input.readInt32();
-              break;
-            }
-            case 48: {
-
-              totalTermsInCollection_ = input.readInt64();
-              break;
-            }
-            case 57: {
-
-              averageDoclength_ = input.readDouble();
-              break;
-            }
-            case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              description_ = s;
               break;
             }
             default: {
@@ -226,141 +115,22 @@ public final class CommonIndexFileFormat {
               io.osirrc.ciff.CommonIndexFileFormat.Header.class, io.osirrc.ciff.CommonIndexFileFormat.Header.Builder.class);
     }
 
-    public static final int VERSION_FIELD_NUMBER = 1;
-    private int version_;
-    /**
-     * <pre>
-     * Version.
-     * </pre>
-     *
-     * <code>int32 version = 1;</code>
-     */
-    public int getVersion() {
-      return version_;
-    }
-
-    public static final int NUM_POSTINGS_LISTS_FIELD_NUMBER = 2;
+    public static final int NUM_POSTINGS_LISTS_FIELD_NUMBER = 1;
     private int numPostingsLists_;
     /**
-     * <pre>
-     * Exactly the number of PostingsList messages that follow the Header.
-     * </pre>
-     *
-     * <code>int32 num_postings_lists = 2;</code>
+     * <code>int32 num_postings_lists = 1;</code>
      */
     public int getNumPostingsLists() {
       return numPostingsLists_;
     }
 
-    public static final int NUM_DOCS_FIELD_NUMBER = 3;
+    public static final int NUM_DOCS_FIELD_NUMBER = 2;
     private int numDocs_;
     /**
-     * <pre>
-     * Exactly the number of DocRecord messages that follow the PostingsList messages.
-     * </pre>
-     *
-     * <code>int32 num_docs = 3;</code>
+     * <code>int32 num_docs = 2;</code>
      */
     public int getNumDocs() {
       return numDocs_;
-    }
-
-    public static final int TOTAL_POSTINGS_LISTS_FIELD_NUMBER = 4;
-    private int totalPostingsLists_;
-    /**
-     * <pre>
-     * The total number of postings lists in the collection; the vocabulary size. This might differ from
-     * num_postings_lists, for example, because we only export the postings lists of query terms.
-     * </pre>
-     *
-     * <code>int32 total_postings_lists = 4;</code>
-     */
-    public int getTotalPostingsLists() {
-      return totalPostingsLists_;
-    }
-
-    public static final int TOTAL_DOCS_FIELD_NUMBER = 5;
-    private int totalDocs_;
-    /**
-     * <pre>
-     * The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
-     * </pre>
-     *
-     * <code>int32 total_docs = 5;</code>
-     */
-    public int getTotalDocs() {
-      return totalDocs_;
-    }
-
-    public static final int TOTAL_TERMS_IN_COLLECTION_FIELD_NUMBER = 6;
-    private long totalTermsInCollection_;
-    /**
-     * <pre>
-     * The total number of terms in the entire collection.
-     * </pre>
-     *
-     * <code>int64 total_terms_in_collection = 6;</code>
-     */
-    public long getTotalTermsInCollection() {
-      return totalTermsInCollection_;
-    }
-
-    public static final int AVERAGE_DOCLENGTH_FIELD_NUMBER = 7;
-    private double averageDoclength_;
-    /**
-     * <pre>
-     * The average document length. We store this value explicitly in case the exporting application wants a particular
-     * level of precision.
-     * </pre>
-     *
-     * <code>double average_doclength = 7;</code>
-     */
-    public double getAverageDoclength() {
-      return averageDoclength_;
-    }
-
-    public static final int DESCRIPTION_FIELD_NUMBER = 8;
-    private volatile java.lang.Object description_;
-    /**
-     * <pre>
-     * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-     * document processing and tokenization pipeline, etc.
-     * </pre>
-     *
-     * <code>string description = 8;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        description_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-     * document processing and tokenization pipeline, etc.
-     * </pre>
-     *
-     * <code>string description = 8;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -377,29 +147,11 @@ public final class CommonIndexFileFormat {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (version_ != 0) {
-        output.writeInt32(1, version_);
-      }
       if (numPostingsLists_ != 0) {
-        output.writeInt32(2, numPostingsLists_);
+        output.writeInt32(1, numPostingsLists_);
       }
       if (numDocs_ != 0) {
-        output.writeInt32(3, numDocs_);
-      }
-      if (totalPostingsLists_ != 0) {
-        output.writeInt32(4, totalPostingsLists_);
-      }
-      if (totalDocs_ != 0) {
-        output.writeInt32(5, totalDocs_);
-      }
-      if (totalTermsInCollection_ != 0L) {
-        output.writeInt64(6, totalTermsInCollection_);
-      }
-      if (averageDoclength_ != 0D) {
-        output.writeDouble(7, averageDoclength_);
-      }
-      if (!getDescriptionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, description_);
+        output.writeInt32(2, numDocs_);
       }
       unknownFields.writeTo(output);
     }
@@ -410,36 +162,13 @@ public final class CommonIndexFileFormat {
       if (size != -1) return size;
 
       size = 0;
-      if (version_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, version_);
-      }
       if (numPostingsLists_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, numPostingsLists_);
+          .computeInt32Size(1, numPostingsLists_);
       }
       if (numDocs_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, numDocs_);
-      }
-      if (totalPostingsLists_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, totalPostingsLists_);
-      }
-      if (totalDocs_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, totalDocs_);
-      }
-      if (totalTermsInCollection_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, totalTermsInCollection_);
-      }
-      if (averageDoclength_ != 0D) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(7, averageDoclength_);
-      }
-      if (!getDescriptionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, description_);
+          .computeInt32Size(2, numDocs_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -456,23 +185,10 @@ public final class CommonIndexFileFormat {
       }
       io.osirrc.ciff.CommonIndexFileFormat.Header other = (io.osirrc.ciff.CommonIndexFileFormat.Header) obj;
 
-      if (getVersion()
-          != other.getVersion()) return false;
       if (getNumPostingsLists()
           != other.getNumPostingsLists()) return false;
       if (getNumDocs()
           != other.getNumDocs()) return false;
-      if (getTotalPostingsLists()
-          != other.getTotalPostingsLists()) return false;
-      if (getTotalDocs()
-          != other.getTotalDocs()) return false;
-      if (getTotalTermsInCollection()
-          != other.getTotalTermsInCollection()) return false;
-      if (java.lang.Double.doubleToLongBits(getAverageDoclength())
-          != java.lang.Double.doubleToLongBits(
-              other.getAverageDoclength())) return false;
-      if (!getDescription()
-          .equals(other.getDescription())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -484,24 +200,10 @@ public final class CommonIndexFileFormat {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getVersion();
       hash = (37 * hash) + NUM_POSTINGS_LISTS_FIELD_NUMBER;
       hash = (53 * hash) + getNumPostingsLists();
       hash = (37 * hash) + NUM_DOCS_FIELD_NUMBER;
       hash = (53 * hash) + getNumDocs();
-      hash = (37 * hash) + TOTAL_POSTINGS_LISTS_FIELD_NUMBER;
-      hash = (53 * hash) + getTotalPostingsLists();
-      hash = (37 * hash) + TOTAL_DOCS_FIELD_NUMBER;
-      hash = (53 * hash) + getTotalDocs();
-      hash = (37 * hash) + TOTAL_TERMS_IN_COLLECTION_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getTotalTermsInCollection());
-      hash = (37 * hash) + AVERAGE_DOCLENGTH_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getAverageDoclength()));
-      hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
-      hash = (53 * hash) + getDescription().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -598,10 +300,6 @@ public final class CommonIndexFileFormat {
       return builder;
     }
     /**
-     * <pre>
-     * This is the CIFF header. It always comes first.
-     * </pre>
-     *
      * Protobuf type {@code io.osirrc.ciff.Header}
      */
     public static final class Builder extends
@@ -639,21 +337,9 @@ public final class CommonIndexFileFormat {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        version_ = 0;
-
         numPostingsLists_ = 0;
 
         numDocs_ = 0;
-
-        totalPostingsLists_ = 0;
-
-        totalDocs_ = 0;
-
-        totalTermsInCollection_ = 0L;
-
-        averageDoclength_ = 0D;
-
-        description_ = "";
 
         return this;
       }
@@ -681,14 +367,8 @@ public final class CommonIndexFileFormat {
       @java.lang.Override
       public io.osirrc.ciff.CommonIndexFileFormat.Header buildPartial() {
         io.osirrc.ciff.CommonIndexFileFormat.Header result = new io.osirrc.ciff.CommonIndexFileFormat.Header(this);
-        result.version_ = version_;
         result.numPostingsLists_ = numPostingsLists_;
         result.numDocs_ = numDocs_;
-        result.totalPostingsLists_ = totalPostingsLists_;
-        result.totalDocs_ = totalDocs_;
-        result.totalTermsInCollection_ = totalTermsInCollection_;
-        result.averageDoclength_ = averageDoclength_;
-        result.description_ = description_;
         onBuilt();
         return result;
       }
@@ -737,30 +417,11 @@ public final class CommonIndexFileFormat {
 
       public Builder mergeFrom(io.osirrc.ciff.CommonIndexFileFormat.Header other) {
         if (other == io.osirrc.ciff.CommonIndexFileFormat.Header.getDefaultInstance()) return this;
-        if (other.getVersion() != 0) {
-          setVersion(other.getVersion());
-        }
         if (other.getNumPostingsLists() != 0) {
           setNumPostingsLists(other.getNumPostingsLists());
         }
         if (other.getNumDocs() != 0) {
           setNumDocs(other.getNumDocs());
-        }
-        if (other.getTotalPostingsLists() != 0) {
-          setTotalPostingsLists(other.getTotalPostingsLists());
-        }
-        if (other.getTotalDocs() != 0) {
-          setTotalDocs(other.getTotalDocs());
-        }
-        if (other.getTotalTermsInCollection() != 0L) {
-          setTotalTermsInCollection(other.getTotalTermsInCollection());
-        }
-        if (other.getAverageDoclength() != 0D) {
-          setAverageDoclength(other.getAverageDoclength());
-        }
-        if (!other.getDescription().isEmpty()) {
-          description_ = other.description_;
-          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -791,61 +452,15 @@ public final class CommonIndexFileFormat {
         return this;
       }
 
-      private int version_ ;
-      /**
-       * <pre>
-       * Version.
-       * </pre>
-       *
-       * <code>int32 version = 1;</code>
-       */
-      public int getVersion() {
-        return version_;
-      }
-      /**
-       * <pre>
-       * Version.
-       * </pre>
-       *
-       * <code>int32 version = 1;</code>
-       */
-      public Builder setVersion(int value) {
-        
-        version_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Version.
-       * </pre>
-       *
-       * <code>int32 version = 1;</code>
-       */
-      public Builder clearVersion() {
-        
-        version_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int numPostingsLists_ ;
       /**
-       * <pre>
-       * Exactly the number of PostingsList messages that follow the Header.
-       * </pre>
-       *
-       * <code>int32 num_postings_lists = 2;</code>
+       * <code>int32 num_postings_lists = 1;</code>
        */
       public int getNumPostingsLists() {
         return numPostingsLists_;
       }
       /**
-       * <pre>
-       * Exactly the number of PostingsList messages that follow the Header.
-       * </pre>
-       *
-       * <code>int32 num_postings_lists = 2;</code>
+       * <code>int32 num_postings_lists = 1;</code>
        */
       public Builder setNumPostingsLists(int value) {
         
@@ -854,11 +469,7 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * Exactly the number of PostingsList messages that follow the Header.
-       * </pre>
-       *
-       * <code>int32 num_postings_lists = 2;</code>
+       * <code>int32 num_postings_lists = 1;</code>
        */
       public Builder clearNumPostingsLists() {
         
@@ -869,21 +480,13 @@ public final class CommonIndexFileFormat {
 
       private int numDocs_ ;
       /**
-       * <pre>
-       * Exactly the number of DocRecord messages that follow the PostingsList messages.
-       * </pre>
-       *
-       * <code>int32 num_docs = 3;</code>
+       * <code>int32 num_docs = 2;</code>
        */
       public int getNumDocs() {
         return numDocs_;
       }
       /**
-       * <pre>
-       * Exactly the number of DocRecord messages that follow the PostingsList messages.
-       * </pre>
-       *
-       * <code>int32 num_docs = 3;</code>
+       * <code>int32 num_docs = 2;</code>
        */
       public Builder setNumDocs(int value) {
         
@@ -892,267 +495,11 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * Exactly the number of DocRecord messages that follow the PostingsList messages.
-       * </pre>
-       *
-       * <code>int32 num_docs = 3;</code>
+       * <code>int32 num_docs = 2;</code>
        */
       public Builder clearNumDocs() {
         
         numDocs_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int totalPostingsLists_ ;
-      /**
-       * <pre>
-       * The total number of postings lists in the collection; the vocabulary size. This might differ from
-       * num_postings_lists, for example, because we only export the postings lists of query terms.
-       * </pre>
-       *
-       * <code>int32 total_postings_lists = 4;</code>
-       */
-      public int getTotalPostingsLists() {
-        return totalPostingsLists_;
-      }
-      /**
-       * <pre>
-       * The total number of postings lists in the collection; the vocabulary size. This might differ from
-       * num_postings_lists, for example, because we only export the postings lists of query terms.
-       * </pre>
-       *
-       * <code>int32 total_postings_lists = 4;</code>
-       */
-      public Builder setTotalPostingsLists(int value) {
-        
-        totalPostingsLists_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The total number of postings lists in the collection; the vocabulary size. This might differ from
-       * num_postings_lists, for example, because we only export the postings lists of query terms.
-       * </pre>
-       *
-       * <code>int32 total_postings_lists = 4;</code>
-       */
-      public Builder clearTotalPostingsLists() {
-        
-        totalPostingsLists_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int totalDocs_ ;
-      /**
-       * <pre>
-       * The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
-       * </pre>
-       *
-       * <code>int32 total_docs = 5;</code>
-       */
-      public int getTotalDocs() {
-        return totalDocs_;
-      }
-      /**
-       * <pre>
-       * The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
-       * </pre>
-       *
-       * <code>int32 total_docs = 5;</code>
-       */
-      public Builder setTotalDocs(int value) {
-        
-        totalDocs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
-       * </pre>
-       *
-       * <code>int32 total_docs = 5;</code>
-       */
-      public Builder clearTotalDocs() {
-        
-        totalDocs_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long totalTermsInCollection_ ;
-      /**
-       * <pre>
-       * The total number of terms in the entire collection.
-       * </pre>
-       *
-       * <code>int64 total_terms_in_collection = 6;</code>
-       */
-      public long getTotalTermsInCollection() {
-        return totalTermsInCollection_;
-      }
-      /**
-       * <pre>
-       * The total number of terms in the entire collection.
-       * </pre>
-       *
-       * <code>int64 total_terms_in_collection = 6;</code>
-       */
-      public Builder setTotalTermsInCollection(long value) {
-        
-        totalTermsInCollection_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The total number of terms in the entire collection.
-       * </pre>
-       *
-       * <code>int64 total_terms_in_collection = 6;</code>
-       */
-      public Builder clearTotalTermsInCollection() {
-        
-        totalTermsInCollection_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private double averageDoclength_ ;
-      /**
-       * <pre>
-       * The average document length. We store this value explicitly in case the exporting application wants a particular
-       * level of precision.
-       * </pre>
-       *
-       * <code>double average_doclength = 7;</code>
-       */
-      public double getAverageDoclength() {
-        return averageDoclength_;
-      }
-      /**
-       * <pre>
-       * The average document length. We store this value explicitly in case the exporting application wants a particular
-       * level of precision.
-       * </pre>
-       *
-       * <code>double average_doclength = 7;</code>
-       */
-      public Builder setAverageDoclength(double value) {
-        
-        averageDoclength_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The average document length. We store this value explicitly in case the exporting application wants a particular
-       * level of precision.
-       * </pre>
-       *
-       * <code>double average_doclength = 7;</code>
-       */
-      public Builder clearAverageDoclength() {
-        
-        averageDoclength_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object description_ = "";
-      /**
-       * <pre>
-       * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-       * document processing and tokenization pipeline, etc.
-       * </pre>
-       *
-       * <code>string description = 8;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          description_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-       * document processing and tokenization pipeline, etc.
-       * </pre>
-       *
-       * <code>string description = 8;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-       * document processing and tokenization pipeline, etc.
-       * </pre>
-       *
-       * <code>string description = 8;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-       * document processing and tokenization pipeline, etc.
-       * </pre>
-       *
-       * <code>string description = 8;</code>
-       */
-      public Builder clearDescription() {
-        
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Description of this index, meant for human consumption. Describing, for example, the exporting application,
-       * document processing and tokenization pipeline, etc.
-       * </pre>
-       *
-       * <code>string description = 8;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        description_ = value;
         onChanged();
         return this;
       }
@@ -1224,10 +571,6 @@ public final class CommonIndexFileFormat {
     int getTf();
   }
   /**
-   * <pre>
-   * An individual posting.
-   * </pre>
-   *
    * Protobuf type {@code io.osirrc.ciff.Posting}
    */
   public  static final class Posting extends
@@ -1499,10 +842,6 @@ public final class CommonIndexFileFormat {
       return builder;
     }
     /**
-     * <pre>
-     * An individual posting.
-     * </pre>
-     *
      * Protobuf type {@code io.osirrc.ciff.Posting}
      */
     public static final class Builder extends
@@ -1764,37 +1103,21 @@ public final class CommonIndexFileFormat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     * The term.
-     * </pre>
-     *
      * <code>string term = 1;</code>
      */
     java.lang.String getTerm();
     /**
-     * <pre>
-     * The term.
-     * </pre>
-     *
      * <code>string term = 1;</code>
      */
     com.google.protobuf.ByteString
         getTermBytes();
 
     /**
-     * <pre>
-     * The document frequency.
-     * </pre>
-     *
      * <code>int64 df = 2;</code>
      */
     long getDf();
 
     /**
-     * <pre>
-     * The collection frequency.
-     * </pre>
-     *
      * <code>int64 cf = 3;</code>
      */
     long getCf();
@@ -1824,10 +1147,6 @@ public final class CommonIndexFileFormat {
         int index);
   }
   /**
-   * <pre>
-   * A postings list, comprised of one ore more postings.
-   * </pre>
-   *
    * Protobuf type {@code io.osirrc.ciff.PostingsList}
    */
   public  static final class PostingsList extends
@@ -1938,10 +1257,6 @@ public final class CommonIndexFileFormat {
     public static final int TERM_FIELD_NUMBER = 1;
     private volatile java.lang.Object term_;
     /**
-     * <pre>
-     * The term.
-     * </pre>
-     *
      * <code>string term = 1;</code>
      */
     public java.lang.String getTerm() {
@@ -1957,10 +1272,6 @@ public final class CommonIndexFileFormat {
       }
     }
     /**
-     * <pre>
-     * The term.
-     * </pre>
-     *
      * <code>string term = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -1980,10 +1291,6 @@ public final class CommonIndexFileFormat {
     public static final int DF_FIELD_NUMBER = 2;
     private long df_;
     /**
-     * <pre>
-     * The document frequency.
-     * </pre>
-     *
      * <code>int64 df = 2;</code>
      */
     public long getDf() {
@@ -1993,10 +1300,6 @@ public final class CommonIndexFileFormat {
     public static final int CF_FIELD_NUMBER = 3;
     private long cf_;
     /**
-     * <pre>
-     * The collection frequency.
-     * </pre>
-     *
      * <code>int64 cf = 3;</code>
      */
     public long getCf() {
@@ -2230,10 +1533,6 @@ public final class CommonIndexFileFormat {
       return builder;
     }
     /**
-     * <pre>
-     * A postings list, comprised of one ore more postings.
-     * </pre>
-     *
      * Protobuf type {@code io.osirrc.ciff.PostingsList}
      */
     public static final class Builder extends
@@ -2439,10 +1738,6 @@ public final class CommonIndexFileFormat {
 
       private java.lang.Object term_ = "";
       /**
-       * <pre>
-       * The term.
-       * </pre>
-       *
        * <code>string term = 1;</code>
        */
       public java.lang.String getTerm() {
@@ -2458,10 +1753,6 @@ public final class CommonIndexFileFormat {
         }
       }
       /**
-       * <pre>
-       * The term.
-       * </pre>
-       *
        * <code>string term = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -2478,10 +1769,6 @@ public final class CommonIndexFileFormat {
         }
       }
       /**
-       * <pre>
-       * The term.
-       * </pre>
-       *
        * <code>string term = 1;</code>
        */
       public Builder setTerm(
@@ -2495,10 +1782,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * The term.
-       * </pre>
-       *
        * <code>string term = 1;</code>
        */
       public Builder clearTerm() {
@@ -2508,10 +1791,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * The term.
-       * </pre>
-       *
        * <code>string term = 1;</code>
        */
       public Builder setTermBytes(
@@ -2528,20 +1807,12 @@ public final class CommonIndexFileFormat {
 
       private long df_ ;
       /**
-       * <pre>
-       * The document frequency.
-       * </pre>
-       *
        * <code>int64 df = 2;</code>
        */
       public long getDf() {
         return df_;
       }
       /**
-       * <pre>
-       * The document frequency.
-       * </pre>
-       *
        * <code>int64 df = 2;</code>
        */
       public Builder setDf(long value) {
@@ -2551,10 +1822,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * The document frequency.
-       * </pre>
-       *
        * <code>int64 df = 2;</code>
        */
       public Builder clearDf() {
@@ -2566,20 +1833,12 @@ public final class CommonIndexFileFormat {
 
       private long cf_ ;
       /**
-       * <pre>
-       * The collection frequency.
-       * </pre>
-       *
        * <code>int64 cf = 3;</code>
        */
       public long getCf() {
         return cf_;
       }
       /**
-       * <pre>
-       * The collection frequency.
-       * </pre>
-       *
        * <code>int64 cf = 3;</code>
        */
       public Builder setCf(long value) {
@@ -2589,10 +1848,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * The collection frequency.
-       * </pre>
-       *
        * <code>int64 cf = 3;</code>
        */
       public Builder clearCf() {
@@ -2899,46 +2154,26 @@ public final class CommonIndexFileFormat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     * Refers to the docid in the postings lists.
-     * </pre>
-     *
      * <code>int32 docid = 1;</code>
      */
     int getDocid();
 
     /**
-     * <pre>
-     * Refers to a docid in the external collection.
-     * </pre>
-     *
      * <code>string collection_docid = 2;</code>
      */
     java.lang.String getCollectionDocid();
     /**
-     * <pre>
-     * Refers to a docid in the external collection.
-     * </pre>
-     *
      * <code>string collection_docid = 2;</code>
      */
     com.google.protobuf.ByteString
         getCollectionDocidBytes();
 
     /**
-     * <pre>
-     * Length of this document.
-     * </pre>
-     *
      * <code>int32 doclength = 3;</code>
      */
     int getDoclength();
   }
   /**
-   * <pre>
-   * A record containing metadata about an individual document.
-   * </pre>
-   *
    * Protobuf type {@code io.osirrc.ciff.DocRecord}
    */
   public  static final class DocRecord extends
@@ -3035,10 +2270,6 @@ public final class CommonIndexFileFormat {
     public static final int DOCID_FIELD_NUMBER = 1;
     private int docid_;
     /**
-     * <pre>
-     * Refers to the docid in the postings lists.
-     * </pre>
-     *
      * <code>int32 docid = 1;</code>
      */
     public int getDocid() {
@@ -3048,10 +2279,6 @@ public final class CommonIndexFileFormat {
     public static final int COLLECTION_DOCID_FIELD_NUMBER = 2;
     private volatile java.lang.Object collectionDocid_;
     /**
-     * <pre>
-     * Refers to a docid in the external collection.
-     * </pre>
-     *
      * <code>string collection_docid = 2;</code>
      */
     public java.lang.String getCollectionDocid() {
@@ -3067,10 +2294,6 @@ public final class CommonIndexFileFormat {
       }
     }
     /**
-     * <pre>
-     * Refers to a docid in the external collection.
-     * </pre>
-     *
      * <code>string collection_docid = 2;</code>
      */
     public com.google.protobuf.ByteString
@@ -3090,10 +2313,6 @@ public final class CommonIndexFileFormat {
     public static final int DOCLENGTH_FIELD_NUMBER = 3;
     private int doclength_;
     /**
-     * <pre>
-     * Length of this document.
-     * </pre>
-     *
      * <code>int32 doclength = 3;</code>
      */
     public int getDoclength() {
@@ -3277,10 +2496,6 @@ public final class CommonIndexFileFormat {
       return builder;
     }
     /**
-     * <pre>
-     * A record containing metadata about an individual document.
-     * </pre>
-     *
      * Protobuf type {@code io.osirrc.ciff.DocRecord}
      */
     public static final class Builder extends
@@ -3442,20 +2657,12 @@ public final class CommonIndexFileFormat {
 
       private int docid_ ;
       /**
-       * <pre>
-       * Refers to the docid in the postings lists.
-       * </pre>
-       *
        * <code>int32 docid = 1;</code>
        */
       public int getDocid() {
         return docid_;
       }
       /**
-       * <pre>
-       * Refers to the docid in the postings lists.
-       * </pre>
-       *
        * <code>int32 docid = 1;</code>
        */
       public Builder setDocid(int value) {
@@ -3465,10 +2672,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * Refers to the docid in the postings lists.
-       * </pre>
-       *
        * <code>int32 docid = 1;</code>
        */
       public Builder clearDocid() {
@@ -3480,10 +2683,6 @@ public final class CommonIndexFileFormat {
 
       private java.lang.Object collectionDocid_ = "";
       /**
-       * <pre>
-       * Refers to a docid in the external collection.
-       * </pre>
-       *
        * <code>string collection_docid = 2;</code>
        */
       public java.lang.String getCollectionDocid() {
@@ -3499,10 +2698,6 @@ public final class CommonIndexFileFormat {
         }
       }
       /**
-       * <pre>
-       * Refers to a docid in the external collection.
-       * </pre>
-       *
        * <code>string collection_docid = 2;</code>
        */
       public com.google.protobuf.ByteString
@@ -3519,10 +2714,6 @@ public final class CommonIndexFileFormat {
         }
       }
       /**
-       * <pre>
-       * Refers to a docid in the external collection.
-       * </pre>
-       *
        * <code>string collection_docid = 2;</code>
        */
       public Builder setCollectionDocid(
@@ -3536,10 +2727,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * Refers to a docid in the external collection.
-       * </pre>
-       *
        * <code>string collection_docid = 2;</code>
        */
       public Builder clearCollectionDocid() {
@@ -3549,10 +2736,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * Refers to a docid in the external collection.
-       * </pre>
-       *
        * <code>string collection_docid = 2;</code>
        */
       public Builder setCollectionDocidBytes(
@@ -3569,20 +2752,12 @@ public final class CommonIndexFileFormat {
 
       private int doclength_ ;
       /**
-       * <pre>
-       * Length of this document.
-       * </pre>
-       *
        * <code>int32 doclength = 3;</code>
        */
       public int getDoclength() {
         return doclength_;
       }
       /**
-       * <pre>
-       * Length of this document.
-       * </pre>
-       *
        * <code>int32 doclength = 3;</code>
        */
       public Builder setDoclength(int value) {
@@ -3592,10 +2767,6 @@ public final class CommonIndexFileFormat {
         return this;
       }
       /**
-       * <pre>
-       * Length of this document.
-       * </pre>
-       *
        * <code>int32 doclength = 3;</code>
        */
       public Builder clearDoclength() {
@@ -3687,18 +2858,14 @@ public final class CommonIndexFileFormat {
   static {
     java.lang.String[] descriptorData = {
       "\n-src/main/protobuf/CommonIndexFileForma" +
-      "t.proto\022\016io.osirrc.ciff\"\314\001\n\006Header\022\017\n\007ve" +
-      "rsion\030\001 \001(\005\022\032\n\022num_postings_lists\030\002 \001(\005\022" +
-      "\020\n\010num_docs\030\003 \001(\005\022\034\n\024total_postings_list" +
-      "s\030\004 \001(\005\022\022\n\ntotal_docs\030\005 \001(\005\022!\n\031total_ter" +
-      "ms_in_collection\030\006 \001(\003\022\031\n\021average_doclen" +
-      "gth\030\007 \001(\001\022\023\n\013description\030\010 \001(\t\"$\n\007Postin" +
-      "g\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n\014Postings" +
-      "List\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022\n\n\002cf\030\003 \001" +
-      "(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirrc.ciff.Po" +
-      "sting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001(\005\022\030\n\020col" +
-      "lection_docid\030\002 \001(\t\022\021\n\tdoclength\030\003 \001(\005b\006" +
-      "proto3"
+      "t.proto\022\016io.osirrc.ciff\"6\n\006Header\022\032\n\022num" +
+      "_postings_lists\030\001 \001(\005\022\020\n\010num_docs\030\002 \001(\005\"" +
+      "$\n\007Posting\022\r\n\005docid\030\001 \001(\005\022\n\n\002tf\030\002 \001(\005\"_\n" +
+      "\014PostingsList\022\014\n\004term\030\001 \001(\t\022\n\n\002df\030\002 \001(\003\022" +
+      "\n\n\002cf\030\003 \001(\003\022)\n\010postings\030\004 \003(\0132\027.io.osirr" +
+      "c.ciff.Posting\"G\n\tDocRecord\022\r\n\005docid\030\001 \001" +
+      "(\005\022\030\n\020collection_docid\030\002 \001(\t\022\021\n\tdoclengt" +
+      "h\030\003 \001(\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3709,7 +2876,7 @@ public final class CommonIndexFileFormat {
     internal_static_io_osirrc_ciff_Header_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_io_osirrc_ciff_Header_descriptor,
-        new java.lang.String[] { "Version", "NumPostingsLists", "NumDocs", "TotalPostingsLists", "TotalDocs", "TotalTermsInCollection", "AverageDoclength", "Description", });
+        new java.lang.String[] { "NumPostingsLists", "NumDocs", });
     internal_static_io_osirrc_ciff_Posting_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_io_osirrc_ciff_Posting_fieldAccessorTable = new

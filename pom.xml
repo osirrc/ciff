@@ -81,12 +81,20 @@
           <useWildcardClassPath>true</useWildcardClassPath>
           <programs>
             <program>
-              <mainClass>io.osirrc.ciff.lucene.ExportAnseriniLuceneIndex</mainClass>
-              <id>ExportAnseriniLuceneIndex</id>
+              <mainClass>io.osirrc.ciff.lucene.DumpLuceneIndex</mainClass>
+              <id>DumpLuceneIndex</id>
             </program>
             <program>
               <mainClass>io.osirrc.ciff.ReadCIFF</mainClass>
               <id>ReadCIFF</id>
+            </program>
+            <program>
+              <mainClass>io.osirrc.ciff.olddog.ExportToOldDog</mainClass>
+              <id>ExportToOldDog</id>
+            </program>
+            <program>
+              <mainClass>io.osirrc.ciff.olddog.ExportTermsToOldDogBulk</mainClass>
+              <id>ExportTermsToOldDogBulk</id>
             </program>
           </programs>
         </configuration>
@@ -102,6 +110,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
+              <excludePackageNames>io.anserini.ltr</excludePackageNames>
             </configuration>
           </execution>
         </executions>
@@ -224,7 +233,7 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <version>3.11.4</version>
+      <version>3.8.0</version>
     </dependency>
   </dependencies>
 </project>
