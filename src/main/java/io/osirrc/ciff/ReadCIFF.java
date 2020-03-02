@@ -30,6 +30,18 @@ public class ReadCIFF {
     FileInputStream fileIn = new FileInputStream(args.input);
     System.out.println("Reading header...");
     CommonIndexFileFormat.Header header = CommonIndexFileFormat.Header.parseDelimitedFrom(fileIn);
+
+    System.out.println("=== Header === ");
+    System.out.println(String.format("version: %d", header.getVersion()));
+    System.out.println(String.format("num_postings_lists: %d", header.getNumPostingsLists()));
+    System.out.println(String.format("num_doc_records: %d", header.getNumDocs()));
+    System.out.println(String.format("total_postings_lists: %d", header.getTotalPostingsLists()));
+    System.out.println(String.format("total_docs: %d", header.getTotalDocs()));
+    System.out.println(String.format("total_terms_in_collection: %d", header.getTotalTermsInCollection()));
+    System.out.println(String.format("average_doclength: %f", header.getAverageDoclength()));
+    System.out.println(String.format("description: %s", header.getDescription()));
+    System.out.println("");
+
     System.out.println(String.format("Expecting %d postings lists and %d doc records in this export.",
         header.getNumPostingsLists(), header.getNumDocs()));
 
