@@ -22,7 +22,8 @@ message Header {
   // The total number of documents in the collection; might differ from num_doc_records for a similar reason as above.
   int32 total_docs = 5;
 
-  // The total number of terms in the entire collection.
+  // The total number of terms in the entire collection. This is the sum of all document lengths of all documents in
+  // the collection.
   int64 total_terms_in_collection = 6;
 
   // The average document length. We store this value explicitly in case the exporting application wants a particular

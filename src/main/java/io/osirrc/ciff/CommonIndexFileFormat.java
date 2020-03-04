@@ -66,7 +66,8 @@ public final class CommonIndexFileFormat {
 
     /**
      * <pre>
-     * The total number of terms in the entire collection.
+     * The total number of terms in the entire collection. This is the sum of all document lengths of all documents in
+     * the collection.
      * </pre>
      *
      * <code>int64 total_terms_in_collection = 6;</code>
@@ -296,7 +297,8 @@ public final class CommonIndexFileFormat {
     private long totalTermsInCollection_;
     /**
      * <pre>
-     * The total number of terms in the entire collection.
+     * The total number of terms in the entire collection. This is the sum of all document lengths of all documents in
+     * the collection.
      * </pre>
      *
      * <code>int64 total_terms_in_collection = 6;</code>
@@ -987,7 +989,8 @@ public final class CommonIndexFileFormat {
       private long totalTermsInCollection_ ;
       /**
        * <pre>
-       * The total number of terms in the entire collection.
+       * The total number of terms in the entire collection. This is the sum of all document lengths of all documents in
+       * the collection.
        * </pre>
        *
        * <code>int64 total_terms_in_collection = 6;</code>
@@ -997,7 +1000,8 @@ public final class CommonIndexFileFormat {
       }
       /**
        * <pre>
-       * The total number of terms in the entire collection.
+       * The total number of terms in the entire collection. This is the sum of all document lengths of all documents in
+       * the collection.
        * </pre>
        *
        * <code>int64 total_terms_in_collection = 6;</code>
@@ -1010,7 +1014,8 @@ public final class CommonIndexFileFormat {
       }
       /**
        * <pre>
-       * The total number of terms in the entire collection.
+       * The total number of terms in the entire collection. This is the sum of all document lengths of all documents in
+       * the collection.
        * </pre>
        *
        * <code>int64 total_terms_in_collection = 6;</code>
