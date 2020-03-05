@@ -59,9 +59,6 @@ public class ExportAnseriniLuceneIndex {
     @Option(name = "-output", metaVar = "[file]", required = true, usage = "postings output")
     public String output = "";
 
-    @Option(name = "-compressed", usage = "generates compressed CIFF")
-    public boolean compressed = false;
-
     @Option(name = "-index", metaVar = "[path]", required = true, usage = "index path")
     public String index = "";
 
@@ -143,7 +140,8 @@ public class ExportAnseriniLuceneIndex {
     }
 
     OutputStream fileOut;
-    if (args.compressed) {
+    if (args.output.endsWith(".gz")) {
+      System.out.println("Inferred from filename suffix to write gzipped compressed output...");
       fileOut = new GZIPOutputStream(new FileOutputStream(args.output));
     } else {
       fileOut = new FileOutputStream(args.output);
