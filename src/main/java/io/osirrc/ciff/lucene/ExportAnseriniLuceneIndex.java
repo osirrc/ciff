@@ -141,7 +141,7 @@ public class ExportAnseriniLuceneIndex {
 
     OutputStream fileOut;
     if (args.output.endsWith(".gz")) {
-      System.out.println("Inferred from filename suffix to write gzipped compressed output...");
+      System.out.println("Inferred from filename suffix to write gzip compressed output...");
       fileOut = new GZIPOutputStream(new FileOutputStream(args.output));
     } else {
       fileOut = new FileOutputStream(args.output);
