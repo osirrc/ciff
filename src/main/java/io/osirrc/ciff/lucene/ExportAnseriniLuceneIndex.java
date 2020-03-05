@@ -1,3 +1,20 @@
+/*
+ * CIFF (Common Index File Format):
+ * an open, binary exchange format for index structures to support search engine interoperability
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.osirrc.ciff.lucene;
 
 import io.osirrc.ciff.CommonIndexFileFormatConstants;
@@ -23,11 +40,13 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.zip.GZIPOutputStream;
 
 import static io.osirrc.ciff.CommonIndexFileFormat.DocRecord;
 import static io.osirrc.ciff.CommonIndexFileFormat.Header;
@@ -40,16 +59,24 @@ public class ExportAnseriniLuceneIndex {
     @Option(name = "-output", metaVar = "[file]", required = true, usage = "postings output")
     public String output = "";
 
+    @Option(name = "-compressed", usage = "generates compressed CIFF")
+    public boolean compressed = false;
+
     @Option(name = "-index", metaVar = "[path]", required = true, usage = "index path")
     public String index = "";
+
+    @Option(name = "-description", metaVar = "[text]", usage = "description")
+    public String description = "";
 
     @Option(name = "-termsFile", metaVar = "[file]", usage = "file containing terms to dump")
     public String termsFile = null;
 
-    @Option(name = "-contentsField", metaVar = "[field name]", usage = "name of the 'contents' field")
+    @Option(name = "-contentsField", metaVar = "[field name]",
+        usage = "name of the field in the Lucene index that holds the main contents of the documents")
     public String contentsField = "contents";
 
-    @Option(name = "-docidField", metaVar = "[field name]", usage = "name of the 'docid' field")
+    @Option(name = "-docidField", metaVar = "[field name]",
+        usage = "name of the field in the Lucene index that holds the docid")
     public String docidsField = "id";
   }
 
@@ -115,7 +142,12 @@ public class ExportAnseriniLuceneIndex {
       throw new RuntimeException("There should be only one leaf, index the collection using the -optimize flag");
     }
 
-    FileOutputStream fileOut = new FileOutputStream(args.output);
+    OutputStream fileOut;
+    if (args.compressed) {
+      fileOut = new GZIPOutputStream(new FileOutputStream(args.output));
+    } else {
+      fileOut = new FileOutputStream(args.output);
+    }
 
     // Go through the index once to count the number of postings lists we're going to export and the vocab size.
     // We need this value to populate the header.
@@ -134,7 +166,7 @@ public class ExportAnseriniLuceneIndex {
         .setTotalDocs(reader.maxDoc())
         .setTotalTermsInCollection(reader.getSumTotalTermFreq(args.contentsField))
         .setAverageDoclength((double) reader.getSumTotalTermFreq(args.contentsField) / reader.maxDoc())
-        .setDescription("Index built by Anserini.")
+        .setDescription(args.description)
         .build().writeDelimitedTo(fileOut);
 
     // Now we can write the postings lists.
