@@ -1,3 +1,20 @@
+/*
+ * CIFF (Common Index File Format):
+ * an open, binary exchange format for index structures to support search engine interoperability
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.osirrc.ciff;
 
 import org.kohsuke.args4j.CmdLineException;
@@ -7,6 +24,8 @@ import org.kohsuke.args4j.OptionHandlerFilter;
 import org.kohsuke.args4j.ParserProperties;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.zip.GZIPInputStream;
 
 public class ReadCIFF {
   public static class Args {
@@ -27,7 +46,14 @@ public class ReadCIFF {
       return;
     }
 
-    FileInputStream fileIn = new FileInputStream(args.input);
+    InputStream fileIn;
+
+    if (args.input.endsWith(".gz")) {
+      fileIn = new GZIPInputStream(new FileInputStream(args.input));
+    } else {
+      fileIn = new FileInputStream(args.input);
+    }
+
     System.out.println("Reading header...");
     CommonIndexFileFormat.Header header = CommonIndexFileFormat.Header.parseDelimitedFrom(fileIn);
 
@@ -40,7 +66,7 @@ public class ReadCIFF {
     System.out.println(String.format("total_terms_in_collection: %d", header.getTotalTermsInCollection()));
     System.out.println(String.format("average_doclength: %f", header.getAverageDoclength()));
     System.out.println(String.format("description: %s", header.getDescription()));
-    System.out.println("");
+    System.out.println();
 
     System.out.println(String.format("Expecting %d postings lists and %d doc records in this export.",
         header.getNumPostingsLists(), header.getNumDocs()));
