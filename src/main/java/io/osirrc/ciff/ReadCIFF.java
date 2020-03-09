@@ -31,6 +31,10 @@ public class ReadCIFF {
   public static class Args {
     @Option(name = "-input", metaVar = "[file]", required = true, usage = "postings file")
     public String input = "";
+
+    @Option(name = "-dumpInterval", metaVar = "[num]",
+        usage = "prints PostingsList and DocRecord messages at this regular inverval for debugging purposes")
+    public int dumpInterval = 100000;
   }
 
   public static void main(String[] argv) throws Exception {
@@ -78,7 +82,7 @@ public class ReadCIFF {
             "Unexpected number of postings! expected %d got %d", pl.getDf(), pl.getPostingsCount()));
       }
 
-      if (i % 100000 == 0) {
+      if (i % args.dumpInterval == 0) {
         System.out.print(String.format("term: '%s', df=%d, cf=%d", pl.getTerm(), pl.getDf(), pl.getCf()));
 
         for (int j = 0; j < (pl.getDf() > 10 ? 10 : pl.getDf()); j++) {
@@ -90,7 +94,7 @@ public class ReadCIFF {
 
     for (int i=0; i<header.getNumDocs(); i++) {
       CommonIndexFileFormat.DocRecord docRecord = CommonIndexFileFormat.DocRecord.parseDelimitedFrom(fileIn);
-      if (i % 100000 == 0) {
+      if (i % args.dumpInterval == 0) {
         System.out.println(String.format("%d\t%s\t%d", docRecord.getDocid(), docRecord.getCollectionDocid(), docRecord.getDoclength()));
       }
     }
