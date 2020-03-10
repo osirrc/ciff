@@ -9,20 +9,29 @@ The file comprises a sequence of [delimited](https://developers.google.com/proto
 + Exactly the number of `PostingsList` messages specified in the `num_postings_lists` field of the `Header`
 + Exactly the number of `DocRecord` messages specified in the `num_docs` field of the `Header`
 
-_Design Rationale_: 
-One might consider an alternative design comprising of a single protobuf message (e.g., the postings lists and doc records are contained in the header).
-In this case, the entire specification of CIFF would be captured in a single protobuf definition.
-This design was considered and rejected because it seems to run counter to [best practices suggested by Google](https://developers.google.com/protocol-buffers/docs/techniques): individual protobuf messages shouldn't be that large.
-Furthermore, Google's automatically-generated code bindings appear to manipulate individual protobuf messages in memory, which would not be practical in our use case for large collections if the entire index were a single protobuf message.
+See [our design rationale](design-rationale.md) for additional discussion.
+
+## Getting Started
+
+After cloning this repo, build CIFF with Maven:
+
+```
+mvn clean package appassembler:assemble
+```
 
 ## Reference Lucene Indexes
 
 Currently, this repo provides an utility to export CIFF from Lucene, via [Anserini](http://anserini.io/).
-For reference, we provide exports from the [Robust04](https://github.com/castorini/anserini/blob/master/docs/regressions-robust04.md) collection:
+For reference, we provide exports from the [Robust04](https://github.com/castorini/anserini/blob/master/docs/regressions-robust04.md) and [ClueWeb12-B13](https://github.com/castorini/anserini/blob/master/docs/regressions-cw12b13.md) collections:
 
-+ [`robust04-complete-20200306.ciff.gz`](https://www.dropbox.com/s/rph6udiqs2k7bfo/robust04-complete-20200306.ciff.gz?dl=0) (162M): complete index
-+ [`robust04-queries-20200306.ciff.gz`](https://www.dropbox.com/s/02i308p4fe2bqh6/robust04-queries-20200306.ciff.gz?dl=0) (16M): postings for [query terms](src/main/resources/robust04-tokens.lucene-analyzed.txt) only
-+ [`lucene-index-ciff.robust04.20200306.tar.gz`](https://www.dropbox.com/s/omh95m1pe5gwhaj/lucene-index-ciff.robust04.20200306.tar.gz?dl=0) (171M): raw Lucene index (source of above exports)
+| Collection | Configuration | Size | MD5 | Download |
+|:-----------|:--------------|-----:|-----|:---------|
+| Robust04   | CIFF export, complete | 162M | `01ce3b9ebfd664b48ffad072fbcae076` | [[Dropbox]](https://www.dropbox.com/s/rph6udiqs2k7bfo/robust04-complete-20200306.ciff.gz?dl=0) |
+| Robust04   | CIFF export, queries only | 16M | `0a8ea07b6a262639e44ec959c4f53d44` | [[Dropbox]](https://www.dropbox.com/s/02i308p4fe2bqh6/robust04-queries-20200306.ciff.gz?dl=0) | [[Dropbox]]
+| Robust04   | Source Lucene index | 135M | `b993045adb24bcbe292d6ed73d5d47b6` | [[Dropbox]](https://www.dropbox.com/s/omh95m1pe5gwhaj/lucene-index-ciff.robust04.20200306.tar.gz?dl=0)
+| ClueWeb12-B13   | CIFF export, complete | 25G | `8fff3a57b9625eca94a286a61062ac82` | [[Dropbox]](https://www.dropbox.com/s/nbxpieqqp5z737h/cw12b-complete-20200309.ciff.gz?dl=0)
+| ClueWeb12-B13   | CIFF export, queries only | 1.2G | `45063400bd5823b7f7fec2bc5cbb2d36` | [[Dropbox]](https://www.dropbox.com/s/bx82uwx2mdzm8jy/cw12b-queries-20200309.ciff.gz?dl=0)
+| ClueWeb12-B13 | Source Lucene index |21G | `6ad327c9c837787f7d9508462e5aa822` | [[Dropbox]](https://www.dropbox.com/s/33lnfrbvr88b999/lucene-index-ciff.cw12b.20200309.tar.gz?dl=0)
 
 The follow invocation can be used to examine an export:
 
@@ -30,31 +39,11 @@ The follow invocation can be used to examine an export:
 target/appassembler/bin/ReadCIFF -input robust04-complete-20200306.ciff.gz
 ```
 
-For replicability, the source index was constructed with the following command, based on v0.7.2 (as tagged in the repo):
+We provide a full guide on how to replicate the above results [here](anserini-export-guide.md).
 
-```bash
-sh target/appassembler/bin/IndexCollection -collection ClueWeb12Collection \
- -input /tuna1/collections/web/ClueWeb12-B13/ -index lucene-index-ciff.cw12b.20200309 \
- -generator JsoupGenerator -threads 8 -optimize
- ```
+## CIFF Importers
 
-Note that `-optimize` must be specified to merge the index down to a single segment.
-
-The follow two invocations created the above exports:
-
-```bash
-target/appassembler/bin/ExportAnseriniLuceneIndex -output robust04-complete-20200306.ciff \
- -index lucene-index-ciff.robust04.20200306 -description "Anserini v0.7.2, Robust04 regression"
-
-target/appassembler/bin/ExportAnseriniLuceneIndex -index lucene-index-ciff.robust04.20200306 \
- -output robust04-queries-20200306.ciff -termsFile src/main/resources/robust04-tokens.lucene-analyzed.txt \
- -description "Anserini v0.7.2, Robust04 regression"
-```
-
-## Ingestion Pipelines
-
-Once we have exported a Lucene index, it can be ingested into a number of different search systems.
-
+A CIFF export can be ingested into a number of different search systems.
 
 + [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff) (includes Python and Rust versions).
 
