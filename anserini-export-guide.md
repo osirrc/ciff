@@ -1,10 +1,10 @@
 # Anserini Export Guide
 
-For replicability, we provide detailed instructions for generating the exports on the main page.
+For replicability, we provide detailed instructions for generating the exports on the main page with [Anserini](http://anserini.io/).
 
 ## Robust04
 
-The source index was constructed with the following command, based on v0.7.2 (as tagged in the repo):
+The source index was constructed with the following command, based on [Anserini](http://anserini.io/) v0.7.2 (as tagged in the repo):
 
 ```bash
 sh target/appassembler/bin/IndexCollection -collection ClueWeb12Collection \
@@ -27,11 +27,9 @@ target/appassembler/bin/ExportAnseriniLuceneIndex -index lucene-index-ciff.robus
 
 ## ClueWeb12-B13
 
-The source index was constructed with the following command, based on v0.7.2 (as tagged in the repo):
+The source index was constructed with the following command, based on [Anserini](http://anserini.io/) v0.7.2 (as tagged in the repo):
 
 ```bash
-git checkout anserini-0.7.2
-
 sh target/appassembler/bin/IndexCollection -collection ClueWeb12Collection \
  -input /tuna1/collections/web/ClueWeb12-B13/ -index lucene-index-ciff.cw12b.20200309 \
  -generator JsoupGenerator -threads 8 -optimize
