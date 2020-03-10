@@ -45,6 +45,6 @@ We provide a full guide on how to replicate the above results [here](anserini-ex
 
 A CIFF export can be ingested into a number of different search systems.
 
-+ [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff) (includes Python and Rust versions).
++ [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff).
 
 
