@@ -15,6 +15,14 @@ In this case, the entire specification of CIFF would be captured in a single pro
 This design was considered and rejected because it seems to run counter to [best practices suggested by Google](https://developers.google.com/protocol-buffers/docs/techniques): individual protobuf messages shouldn't be that large.
 Furthermore, Google's automatically-generated code bindings appear to manipulate individual protobuf messages in memory, which would not be practical in our use case for large collections if the entire index were a single protobuf message.
 
+## Getting Started
+
+After cloning this repo, build CIFF with Maven:
+
+```
+mvn clean package appassembler:assemble
+```
+
 ## Reference Lucene Indexes
 
 Currently, this repo provides an utility to export CIFF from Lucene, via [Anserini](http://anserini.io/).
@@ -28,6 +36,12 @@ For reference, we provide exports from the [Robust04](https://github.com/castori
 | ClueWeb12-B13   | CIFF export, complete | 25G | `8fff3a57b9625eca94a286a61062ac82` | [[Dropbox]](https://www.dropbox.com/s/nbxpieqqp5z737h/cw12b-complete-20200309.ciff.gz?dl=0)
 | ClueWeb12-B13   | CIFF export, queries only | 1.2G | `45063400bd5823b7f7fec2bc5cbb2d36` | [[Dropbox]](https://www.dropbox.com/s/bx82uwx2mdzm8jy/cw12b-queries-20200309.ciff.gz?dl=0)
 | ClueWeb12-B13 | Source Lucene index |21G | `6ad327c9c837787f7d9508462e5aa822` | [[Dropbox]](https://www.dropbox.com/s/33lnfrbvr88b999/lucene-index-ciff.cw12b.20200309.tar.gz?dl=0)
+
+The follow invocation can be used to examine an export:
+
+```bash
+target/appassembler/bin/ReadCIFF -input robust04-complete-20200306.ciff.gz
+```
 
 We provide a full guide on how to replicate the above results [here](anserini-export-guide.md).
 
