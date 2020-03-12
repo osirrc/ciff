@@ -46,5 +46,6 @@ We provide a full guide on how to replicate the above results [here](anserini-ex
 A CIFF export can be ingested into a number of different search systems.
 
 + [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff).
++ [OldDog](https://github.com/chriskamphuis/olddog) by [creating csv files through CIFF](https://github.com/Chriskamphuis/olddog/blob/master/src/main/java/nl/ru/convert/CiffToCsv.java)
 
 
