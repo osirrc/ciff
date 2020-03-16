@@ -48,3 +48,4 @@ A CIFF export can be ingested into a number of different search systems.
 + [JASSv2](https://github.com/andrewtrotman/JASSv2) via the tool [ciff_to_JASS](https://github.com/andrewtrotman/JASSv2/tree/master/tools).
 + [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff).
 + [OldDog](https://github.com/chriskamphuis/olddog) by [creating csv files through CIFF](https://github.com/Chriskamphuis/olddog/blob/master/src/main/java/nl/ru/convert/CiffToCsv.java)
++ [Terrier](http://terrier.org) via the [Terrier-CIFF plugin](https://github.com/terrierteam/terrier-ciff)
