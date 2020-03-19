@@ -62,42 +62,70 @@ public class ReadCIFF {
     CommonIndexFileFormat.Header header = CommonIndexFileFormat.Header.parseDelimitedFrom(fileIn);
 
     System.out.println("=== Header === ");
-    System.out.println(String.format("version: %d", header.getVersion()));
-    System.out.println(String.format("num_postings_lists: %d", header.getNumPostingsLists()));
-    System.out.println(String.format("num_doc_records: %d", header.getNumDocs()));
-    System.out.println(String.format("total_postings_lists: %d", header.getTotalPostingsLists()));
-    System.out.println(String.format("total_docs: %d", header.getTotalDocs()));
-    System.out.println(String.format("total_terms_in_collection: %d", header.getTotalTermsInCollection()));
+    System.out.println(String.format("version: %,d", header.getVersion()));
+    System.out.println(String.format("num_postings_lists: %,d", header.getNumPostingsLists()));
+    System.out.println(String.format("num_doc_records: %,d", header.getNumDocs()));
+    System.out.println(String.format("total_postings_lists: %,d", header.getTotalPostingsLists()));
+    System.out.println(String.format("total_docs: %,d", header.getTotalDocs()));
+    System.out.println(String.format("total_terms_in_collection: %,d", header.getTotalTermsInCollection()));
     System.out.println(String.format("average_doclength: %f", header.getAverageDoclength()));
     System.out.println(String.format("description: %s", header.getDescription()));
     System.out.println();
 
-    System.out.println(String.format("Expecting %d postings lists and %d doc records in this export.",
+    System.out.println(String.format("Expecting %,d PostingsList and %,d DocRecords in this export.\n",
         header.getNumPostingsLists(), header.getNumDocs()));
 
+    System.out.println(String.format("Reading every PostingsList, dumping out every %,dth:", args.dumpInterval));
+    long sumOfAllTfs = 0;
     for (int i=0; i<header.getNumPostingsLists(); i++ ) {
       CommonIndexFileFormat.PostingsList pl = CommonIndexFileFormat.PostingsList.parseDelimitedFrom(fileIn);
       if (pl.getDf() != pl.getPostingsCount()) {
         throw new RuntimeException(String.format(
-            "Unexpected number of postings! expected %d got %d", pl.getDf(), pl.getPostingsCount()));
+            "Unexpected number of postings! expected %,d got %,d", pl.getDf(), pl.getPostingsCount()));
       }
 
       if (i % args.dumpInterval == 0) {
-        System.out.print(String.format("term: '%s', df=%d, cf=%d", pl.getTerm(), pl.getDf(), pl.getCf()));
+        System.out.print(String.format("term: '%s', df=%,d, cf=%,d", pl.getTerm(), pl.getDf(), pl.getCf()));
 
         for (int j = 0; j < (pl.getDf() > 10 ? 10 : pl.getDf()); j++) {
           System.out.print(String.format(" (%d, %d)", pl.getPostings(j).getDocid(), pl.getPostings(j).getTf()));
         }
         System.out.println(pl.getDf() > 10 ? " ..." : "");
       }
-    }
 
+      for (int j=0; j<pl.getDf(); j++) {
+        sumOfAllTfs += pl.getPostings(j).getTf();
+      }
+    }
+    System.out.println(String.format("%,d postings lists read\n", header.getNumPostingsLists()));
+
+    System.out.println(String.format("Reading every DocRecord, dumping out every %,dth:", args.dumpInterval));
+    long totalTermsInCollection = 0; // Should be sum of doclengths.
     for (int i=0; i<header.getNumDocs(); i++) {
       CommonIndexFileFormat.DocRecord docRecord = CommonIndexFileFormat.DocRecord.parseDelimitedFrom(fileIn);
       if (i % args.dumpInterval == 0) {
-        System.out.println(String.format("%d\t%s\t%d", docRecord.getDocid(), docRecord.getCollectionDocid(), docRecord.getDoclength()));
+        System.out.println(String.format(
+            "%d\t%s\t%d", docRecord.getDocid(), docRecord.getCollectionDocid(), docRecord.getDoclength()));
       }
+      totalTermsInCollection += docRecord.getDoclength();
     }
+
+    System.out.println("\nIntegrity checks:");
+    System.out.print(" 'total_terms_in_collection' in Header == sum of doclengths from DocRecords: ");
+    if (totalTermsInCollection == header.getTotalTermsInCollection()) {
+      System.out.print("[PASSED]\n");
+    } else {
+      System.out.print(String.format("[FAILED] %,d vs. %,d\n",
+          header.getTotalTermsInCollection(), totalTermsInCollection));
+    }
+    System.out.print(" 'total_terms_in_collection' in Header == sum of all tfs in all Postings:    ");
+    if (sumOfAllTfs == header.getTotalTermsInCollection()) {
+      System.out.print("[PASSED]\n");
+    } else {
+      System.out.print(String.format("[FAILED] %,d vs. %,d\n",
+          header.getTotalTermsInCollection(), sumOfAllTfs));
+    }
+
     fileIn.close();
   }
 }
