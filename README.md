@@ -1,6 +1,9 @@
 # Common Index File Format
 
 The Common Index File Format (CIFF) represents an attempt to build a binary data exchange format for open-source search engines to interoperate by sharing index structures.
+For more details, check out:
+
++ Jimmy Lin, Joel Mackenzie, Chris Kamphuis, Craig Macdonald, Antonio Mallia, Michał Siedlaczek, Andrew Trotman, Arjen de Vries. [Supporting Interoperability Between Open-Source Search Engines with the Common Index File Format](https://arxiv.org/abs/2003.08276). _arXiv:2003.08276_.
 
 All data are contained in a single file, with the extension `.ciff`.
 The file comprises a sequence of [delimited](https://developers.google.com/protocol-buffers/docs/techniques) protobuf messages defined [here](src/main/protobuf/CommonIndexFileFormat.proto), exactly as follows:
