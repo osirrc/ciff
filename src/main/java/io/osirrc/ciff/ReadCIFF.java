@@ -123,7 +123,7 @@ public class ReadCIFF {
       System.out.print("[PASSED]\n");
     } else {
       System.out.print(String.format("[FAILED] %,d vs. %,d\n",
-          header.getTotalTermsInCollection(), totalTermsInCollection));
+          header.getTotalTermsInCollection(), sumOfAllTfs));
     }
 
     fileIn.close();
