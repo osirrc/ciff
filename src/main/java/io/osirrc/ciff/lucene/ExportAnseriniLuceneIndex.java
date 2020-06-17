@@ -181,7 +181,7 @@ public class ExportAnseriniLuceneIndex {
         continue;
       }
 
-      Term term = new Term("contents", token);
+      Term term = new Term(args.contentsField, token);
       long df = reader.docFreq(term);
       long cf = reader.totalTermFreq(term);
 
