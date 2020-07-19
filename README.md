@@ -14,6 +14,9 @@ The file comprises a sequence of [delimited](https://developers.google.com/proto
 
 See [our design rationale](design-rationale.md) for additional discussion.
 
+Explained in terms of xkcd, we're trying to avoid [this](https://xkcd.com/927/).
+Instead, CIFF aims to be [this](https://xkcd.com/1406/).
+
 ## Getting Started
 
 After cloning this repo, build CIFF with Maven:
