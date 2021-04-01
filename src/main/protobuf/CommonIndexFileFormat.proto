@@ -6,6 +6,7 @@ package io.osirrc.ciff;
 //  - A Header protobuf message,
 //  - Exactly the number of PostingsList messages specified in the num_postings_lists field of the Header
 //  - Exactly the number of DocRecord messages specified in the num_doc_records field of the Header
+// Each message is written using message.writeDelimitedTo(), which prefixes each message with its varint encoded size.
 // The protobuf messages are defined below.
 
 // This is the CIFF header. It always comes first.
@@ -37,7 +38,7 @@ message Header {
 
 // An individual posting.
 message Posting {
-  int32 docid = 1;
+  int32 docid = 1; //the *delta-gap* compressed docid
   int32 tf = 2;
 }
 
