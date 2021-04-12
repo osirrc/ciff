@@ -55,3 +55,15 @@ A CIFF export can be ingested into a number of different search systems.
 + [PISA](https://github.com/pisa-engine/pisa) via the [PISA CIFF Binaries](https://github.com/pisa-engine/ciff).
 + [OldDog](https://github.com/chriskamphuis/olddog) by [creating csv files through CIFF](https://github.com/Chriskamphuis/olddog/blob/master/src/main/java/nl/ru/convert/CiffToCsv.java)
 + [Terrier](http://terrier.org) via the [Terrier-CIFF plugin](https://github.com/terrierteam/terrier-ciff)
+
+##  Tips for writing your own CIFF Importer / Exporter
+
+The systems above all provide concrete examples of taking an existing CIFF structure and converting it into a different (internal) index format.
+Most of the data/structures within the CIFF are quite straightforward and self-documenting. However, there are a few important details which
+should be noted.
+
+1. The default CIFF exports come from Anserini. Those exports are engineered to encode document identifiers *as deltas (d-gaps).* Hence, when decoding a CIFF structure, care needs to be taken to recover the original identifiers by computing a prefix sum across each postings list. See the discussion [here](https://github.com/osirrc/ciff/issues/19).
+
+2. Since Anserini is based on Lucene, it is important to note that document lengths are encoded in a lossy manner. This means that the document lengths recorded in the `DocRecord` structure are *approximate* - see the discussion [here](https://github.com/osirrc/ciff/issues/21).
+
+3. Multiple records are stored in a single file using Java protobuf's parseDelimitedFrom() and writeDelimitedTo() methods. Unfortunately, these methods are not available in the bindings for other languages. These can be trivially reimplemented be reading/writing the bytesize of the record using varint - see the discussion [here](https://github.com/osirrc/ciff/issues/27).
